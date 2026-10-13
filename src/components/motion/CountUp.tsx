@@ -32,7 +32,11 @@ export function CountUp({
     const start = from.current ?? 0;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (!e.isIntersecting) return;
+        // Hors écran au premier passage : on repart de zéro pour l'animation à venir.
+        if (!e.isIntersecting) {
+          if (from.current === null) setDisplay(fmt(start, decimals));
+          return;
+        }
         io.disconnect();
         const t0 = performance.now();
         const step = (t: number) => {

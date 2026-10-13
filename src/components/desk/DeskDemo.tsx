@@ -13,6 +13,7 @@ import { AlertsCenter, LevelIcon } from "./AlertsCenter";
 import { DocumentsCenter } from "./DocumentsCenter";
 import { LEVEL_COLOR, STATUS_LABEL, compactEur, last12, nf, portfolioTotals } from "./format";
 import { cn } from "@/lib/cn";
+import { CountUp } from "@/components/motion/CountUp";
 
 type View = "overview" | "sites" | "timeline" | "documents" | "alerts";
 
@@ -107,12 +108,18 @@ export function DeskDemo({ initialView = "overview", embedded = false }: { initi
               {view === "overview" && (
                 <div className="grid gap-4">
                   <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[4px] border border-[var(--line)] bg-[var(--line)] xl:grid-cols-4">
-                    <Kpi label="Dépenses énergie · 12 mois" value={compactEur(totals.spend)} sub="part énergie, estimée, HT" />
-                    <Kpi label="Consommation · 12 mois" value={`${nf(totals.elecMWh + totals.gasMWh)} MWh`} sub={`${nf(totals.elecMWh)} élec. · ${nf(totals.gasMWh)} gaz`} />
-                    <Kpi label="Contrats actifs" value={String(totals.contracts)} sub={`${p.sites.length} sites · ${new Set(p.sites.flatMap((s) => s.contracts.map((c) => c.supplier))).size} fournisseurs`} />
+                    <Kpi label="Dépenses énergie · 12 mois" value={compactEur(totals.spend)} count={{ value: Math.round(totals.spend / 1000), suffix: " k€" }} sub="part énergie, estimée, HT" />
+                    <Kpi
+                      label="Consommation · 12 mois"
+                      value={`${nf(totals.elecMWh + totals.gasMWh)} MWh`}
+                      count={{ value: Math.round(totals.elecMWh + totals.gasMWh), suffix: " MWh" }}
+                      sub={`${nf(totals.elecMWh)} élec. · ${nf(totals.gasMWh)} gaz`}
+                    />
+                    <Kpi label="Contrats actifs" value={String(totals.contracts)} count={{ value: totals.contracts }} sub={`${p.sites.length} sites · ${new Set(p.sites.flatMap((s) => s.contracts.map((c) => c.supplier))).size} fournisseurs`} />
                     <Kpi
                       label="Prochaine échéance"
                       value={totals.next ? `J-${totals.next.days}` : "—"}
+                      count={totals.next ? { value: totals.next.days, prefix: "J-" } : undefined}
                       sub={totals.next ? `${totals.next.s.name} · ${ENERGY_LABEL[totals.next.c.energy]}` : ""}
                       accent
                     />
@@ -266,11 +273,25 @@ function Card({ children, className }: { children: React.ReactNode; className?: 
   return <section className={cn("rounded-[4px] border border-[var(--line)] bg-ink-850 p-4 md:p-5", className)}>{children}</section>;
 }
 
-function Kpi({ label, value, sub, accent }: { label: string; value: string; sub?: string; accent?: boolean }) {
+function Kpi({
+  label,
+  value,
+  sub,
+  accent,
+  count,
+}: {
+  label: string;
+  value: string;
+  sub?: string;
+  accent?: boolean;
+  count?: { value: number; prefix?: string; suffix?: string };
+}) {
   return (
     <div className="bg-ink-850 p-4">
       <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-fg-3">{label}</p>
-      <p className={cn("mt-2 text-[26px] font-medium leading-none tracking-tight", accent && "text-volt")}>{value}</p>
+      <p className={cn("mt-2 text-[26px] font-medium leading-none tracking-tight", accent && "text-volt")} aria-label={value}>
+        {count ? <CountUp value={count.value} prefix={count.prefix} suffix={count.suffix} duration={1400} /> : value}
+      </p>
       {sub && <p className="mt-1.5 truncate text-[11.5px] text-fg-3">{sub}</p>}
     </div>
   );

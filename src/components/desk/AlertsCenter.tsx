@@ -63,13 +63,12 @@ export function AlertsCenter({
 
   return (
     <div>
-      <div role="tablist" aria-label="Filtrer par niveau" className="flex flex-wrap gap-1.5">
+      <div role="group" aria-label="Filtrer par niveau" className="flex flex-wrap gap-1.5">
         {([0, 3, 2, 1] as const).map((l) => (
           <button
             key={l}
-            role="tab"
             type="button"
-            aria-selected={filter === l}
+            aria-pressed={filter === l}
             onClick={() => setFilter(l)}
             className={cn(
               "flex items-center gap-2 rounded-[3px] border px-2.5 py-1.5 text-[12px] transition-colors",

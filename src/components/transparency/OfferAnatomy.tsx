@@ -35,13 +35,12 @@ export function OfferAnatomy({ tone = "dark" }: { tone?: "dark" | "paper" }) {
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <div role="tablist" aria-label="Énergie" className={cn("flex rounded-[3px] border p-0.5", paper ? "border-ink-text/15" : "border-[var(--line)]")}>
+        <div role="group" aria-label="Énergie" className={cn("flex rounded-[3px] border p-0.5", paper ? "border-ink-text/15" : "border-[var(--line)]")}>
           {(["electricite", "gaz"] as const).map((e) => (
             <button
               key={e}
-              role="tab"
               type="button"
-              aria-selected={energy === e}
+              aria-pressed={energy === e}
               onClick={() => {
                 setEnergy(e);
                 setActive("energie");
@@ -59,13 +58,13 @@ export function OfferAnatomy({ tone = "dark" }: { tone?: "dark" | "paper" }) {
       </div>
 
       {/* barre décomposée */}
-      <div className="mt-8 flex h-16 gap-[3px] md:h-20" role="list">
+      <div className="mt-8 flex h-16 gap-[3px] md:h-20" role="group" aria-label="Composantes de la facture">
         {parts.map((p) => (
           <button
             key={`${energy}-${p.id}`}
             type="button"
-            role="listitem"
-            aria-label={`${p.label} : environ ${Math.round(p.share)} %`}
+            aria-label={`${p.label} : environ ${Math.round(p.share)} % (${p.tag.toLowerCase()})`}
+            aria-pressed={active === p.id}
             onClick={() => setActive(p.id)}
             onPointerEnter={() => setActive(p.id)}
             className="group relative h-full origin-left animate-[grow_1.1s_var(--ease-out-expo)_both] overflow-hidden rounded-[2px] text-left transition-[filter] duration-300"

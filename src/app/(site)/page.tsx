@@ -13,6 +13,7 @@ import { Commitments } from "@/components/home/Commitments";
 import { Split } from "@/components/motion/Split";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PageWrap } from "@/components/ui/PageWrap";
+import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 
 export default function HomePage() {
   return (
@@ -36,6 +37,8 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      <VelocityMarquee items={["Analyse", "Consultation", "Décision", "Suivi"]} className="border-y border-[var(--line)]" />
 
       {/* Méthode */}
       <section id="methode" className="relative border-t border-[var(--line)]">

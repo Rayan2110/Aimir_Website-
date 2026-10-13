@@ -97,13 +97,12 @@ export function BeforeAfter() {
       {/* barre supérieure */}
       <div className="flex flex-col gap-4 border-b border-[var(--line)] px-5 py-4 md:flex-row md:items-center md:justify-between md:px-8">
         <ExampleBadge />
-        <div role="tablist" aria-label="Profil d'exemple" className="flex gap-1 overflow-x-auto no-scrollbar">
+        <div role="group" aria-label="Profil d'exemple" className="flex gap-1 overflow-x-auto no-scrollbar">
           {PROFILES.map((x, i) => (
             <button
               key={x.id}
-              role="tab"
               type="button"
-              aria-selected={i === pi}
+              aria-pressed={i === pi}
               onClick={() => {
                 setPi(i);
                 setMwh(x.mwh.default);
