@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { PageWrap } from "@/components/ui/PageWrap";
 import { PageHero } from "@/components/layout/PageHero";
-import { Container, ExampleBadge, SectionHead } from "@/components/ui/Section";
+import { Container, SectionHead } from "@/components/ui/Section";
+import { StudyDocument } from "@/components/study/StudyDocument";
 import { BeforeAfter } from "@/components/simulator/BeforeAfter";
 import { CtaBand } from "@/components/ui/CtaBand";
 
@@ -31,9 +32,15 @@ export default function EtudesDeCasPage() {
 
       <section className="py-24 md:py-32">
         <Container>
-          <SectionHead index="01" label="Le format" title="Une étude, *lue en une minute.*" align="split" lead="Le même cadre pour chaque dossier : contrat actuel, consultation, proposition retenue et écart estimé, avec la méthodologie visible." />
+          <SectionHead
+            index="01"
+            label="Étude-type"
+            title="Une étude, *lue en une minute.*"
+            lead="Voici, sur un exemple entièrement fictif, le document que reçoit un client : profil, contrat actuel, consultation, propositions, notre lecture et les hypothèses."
+            align="split"
+          />
           <div className="mt-14" data-reveal>
-            <BeforeAfter />
+            <StudyDocument />
           </div>
         </Container>
       </section>
@@ -54,24 +61,19 @@ export default function EtudesDeCasPage() {
 
       <section className="border-t border-[var(--line)] py-24 md:py-32">
         <Container>
-          <SectionHead index="03" label="Publications" title="Premières études *à venir.*" align="split" />
-          <div className="mt-14 grid gap-4 md:grid-cols-3">
-            {["Restaurant — Île-de-France", "Hôtel — Auvergne-Rhône-Alpes", "Copropriété — Nouvelle-Aquitaine"].map((t, i) => (
-              <article key={t} className="relative overflow-hidden rounded-[4px] border border-dashed border-[var(--line-strong)] p-6" data-reveal style={{ ["--d" as string]: i * 80 }}>
-                <ExampleBadge>Emplacement réservé</ExampleBadge>
-                <h3 className="mt-6 text-[20px] tracking-tight text-fg-2">{t}</h3>
-                <dl className="mt-5 grid gap-2 font-mono text-[12px] text-fg-3">
-                  {["Consommation annuelle", "Contrat précédent", "Nouvelle structure", "Écart estimé", "Durée"].map((k) => (
-                    <div key={k} className="flex justify-between border-t border-[var(--line)] pt-2">
-                      <dt>{k}</dt>
-                      <dd>—</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="mt-5 text-[12px] text-fg-3">Publiée après accord écrit du client et anonymisation.</p>
-              </article>
-            ))}
+          <SectionHead
+            index="03"
+            label="Simulateur"
+            title="Faites varier *la consommation.*"
+            lead="Trois profils fictifs pour comprendre comment se lit un écart : changez de profil, déplacez le curseur."
+            align="split"
+          />
+          <div className="mt-14" data-reveal>
+            <BeforeAfter />
           </div>
+          <p className="mt-8 max-w-2xl text-[14px] text-fg-3">
+            Les premières études réelles seront publiées ici, anonymisées et uniquement avec l&apos;accord écrit des clients concernés.
+          </p>
         </Container>
       </section>
 

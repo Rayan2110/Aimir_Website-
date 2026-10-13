@@ -58,6 +58,7 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
     website: "",
   });
   const input = useRef<HTMLInputElement>(null);
+  const camera = useRef<HTMLInputElement>(null);
   const panel = useRef<HTMLDivElement>(null);
   const dragDepth = useRef(0);
 
@@ -253,9 +254,9 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
         <AnimatePresence mode="wait" initial={false}>
           {step === "drop" && (
             <motion.div key="drop" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.5, ease }}>
-              <label
-                htmlFor={`${uid}-file`}
+              <div
                 data-cursor="Déposer"
+                onClick={() => input.current?.click()}
                 onDragEnter={(e) => {
                   e.preventDefault();
                   dragDepth.current++;
@@ -274,17 +275,36 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
                 }}
                 className={cn(
                   "conic-border group relative flex cursor-pointer flex-col items-center justify-center rounded-[4px] border border-dashed text-center transition-all duration-500",
-                  compact ? "min-h-[220px] px-5 py-8" : "min-h-[300px] px-8 py-12",
+                  compact ? "min-h-[220px] px-5 py-7" : "min-h-[300px] px-8 py-12",
                   dragging ? "scale-[1.015] border-volt bg-volt/[0.07]" : "border-[var(--line-strong)] bg-ink-900/40 hover:bg-ink-900/70",
                 )}
               >
                 <DocGlyph active={dragging} />
-                <span className={cn("mt-6 tracking-tight", compact ? "text-xl" : "text-2xl md:text-[28px]")}>
+                <span className={cn("mt-5 tracking-tight", compact ? "text-xl" : "text-2xl md:text-[28px]")}>
                   {dragging ? "Relâchez pour déposer" : "Déposez votre facture"}
                 </span>
-                <span className="mt-2 max-w-xs text-sm text-fg-2">
-                  Glissez un PDF ou une photo ici, ou{" "}
-                  <span className="text-volt underline decoration-volt/40 underline-offset-4">choisissez un fichier</span>
+                <span className="mt-2 max-w-xs text-sm text-fg-2">Glissez un PDF ou une photo ici, ou :</span>
+                <span className="mt-4 flex flex-wrap items-center justify-center gap-2" onClick={(e) => e.stopPropagation()}>
+                  <button
+                    type="button"
+                    onClick={() => input.current?.click()}
+                    className="inline-flex h-10 items-center gap-2 rounded-[3px] border border-volt/60 bg-volt/10 px-4 font-mono text-[11px] uppercase tracking-[0.12em] text-fg transition-colors hover:bg-volt/20"
+                  >
+                    <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+                      <path d="M4 1.5h5l3 3V14.5H4zM9 1.5v3h3M8 12V7M6 9l2-2 2 2" />
+                    </svg>
+                    Choisir un fichier
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => camera.current?.click()}
+                    className="hidden h-10 items-center gap-2 rounded-[3px] border border-[var(--line-strong)] px-4 font-mono text-[11px] uppercase tracking-[0.12em] text-fg transition-colors hover:border-fg/50 [@media(pointer:coarse)]:inline-flex"
+                  >
+                    <svg viewBox="0 0 16 16" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+                      <path d="M1.5 5h3l1-2h5l1 2h3v8.5h-13zM8 11.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z" />
+                    </svg>
+                    Prendre une photo
+                  </button>
                 </span>
                 <span className="mt-5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-fg-3">PDF · JPG · PNG · HEIC — 10 Mo max</span>
                 <input
@@ -294,12 +314,27 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
                   multiple
                   accept=".pdf,.jpg,.jpeg,.png,.webp,.heic,.heif,application/pdf,image/*"
                   className="sr-only"
+                  tabIndex={-1}
+                  aria-label="Choisir une facture"
                   onChange={(e) => {
                     if (e.target.files?.length) addFiles(e.target.files);
                     e.target.value = "";
                   }}
                 />
-              </label>
+                <input
+                  ref={camera}
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  className="sr-only"
+                  tabIndex={-1}
+                  aria-label="Photographier une facture"
+                  onChange={(e) => {
+                    if (e.target.files?.length) addFiles(e.target.files);
+                    e.target.value = "";
+                  }}
+                />
+              </div>
               {fileError && (
                 <p role="alert" className="mt-3 text-sm text-crit">
                   {fileError}

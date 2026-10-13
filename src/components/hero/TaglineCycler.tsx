@@ -24,7 +24,7 @@ export function TaglineCycler() {
             style={{ ["--d" as string]: 250 + i * 110 }}
             className={cn(
               "relative transition-colors duration-700",
-              i === active ? "text-fg" : "text-fg/30",
+              i === active ? "text-fg" : "text-fg/50",
             )}
           >
             {w}

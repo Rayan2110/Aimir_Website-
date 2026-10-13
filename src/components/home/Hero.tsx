@@ -23,9 +23,9 @@ export function Hero() {
 
       <div className="mx-auto grid w-full max-w-[1440px] flex-1 items-center gap-12 px-[var(--gutter)] py-12 lg:grid-cols-12 lg:gap-8 lg:py-16">
         <div className="lg:col-span-7">
-          <p className="eyebrow rise mb-8 flex items-center gap-3" style={{ ["--d" as string]: 100 }}>
-            <span className="h-px w-8 bg-volt" />
-            Courtier en énergie · Professionnels · France
+          <p className="rise mb-8 flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.16em] text-fg-2 md:text-[13px]" style={{ ["--d" as string]: 100 }}>
+            <span className="h-px w-8 shrink-0 bg-volt" />
+            Courtier en électricité &amp; gaz pour les professionnels
           </p>
           <h1 className="display text-[clamp(2.7rem,5.2vw,5.6rem)]">
             <span className="sr-only">{site.name}, courtier en électricité et gaz pour les professionnels : </span>
@@ -35,7 +35,7 @@ export function Hero() {
             {site.baseline}
           </p>
           <div className="rise mt-10 flex flex-wrap items-center gap-4" style={{ ["--d" as string]: 800 }}>
-            <ButtonLink href="/envoyer-une-facture" magnetic>
+            <ButtonLink href="#depot" magnetic>
               Analyser ma facture
             </ButtonLink>
             <ButtonLink href="/methode" variant="ghost">
@@ -47,7 +47,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="rise lg:col-span-5 lg:pl-6" style={{ ["--d" as string]: 700 }}>
+        <div id="depot" className="rise scroll-mt-28 lg:col-span-5 lg:pl-6" style={{ ["--d" as string]: 700 }}>
           <InvoiceFlow variant="hero" />
         </div>
       </div>

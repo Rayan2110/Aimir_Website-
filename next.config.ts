@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Développement : autorise l'aperçu depuis un téléphone sur le même réseau local.
+  allowedDevOrigins: ["192.168.*.*", "*.local"],
   turbopack: {
     rules: {
       "*.css": {

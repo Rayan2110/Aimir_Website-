@@ -31,6 +31,8 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   formatDetection: { telephone: false, email: false, address: false },
+  // Tant que les fondateurs n'ont pas validé le site, aucune page n'est indexée.
+  robots: site.indexable ? undefined : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
