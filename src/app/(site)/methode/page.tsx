@@ -3,6 +3,7 @@ import { PageWrap } from "@/components/ui/PageWrap";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, SectionHead } from "@/components/ui/Section";
 import { METHOD_STEPS } from "@/content/method";
+import { MethodScroll } from "@/components/method/MethodScroll";
 import { OfferAnatomy } from "@/components/transparency/OfferAnatomy";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { ButtonLink } from "@/components/ui/Button";
@@ -61,6 +62,11 @@ export default function MethodePage() {
           ))}
         </ol>
       </PageHero>
+
+      {/* Méthode animée (desktop) */}
+      <section className="hidden border-b border-[var(--line)] lg:block">
+        <MethodScroll />
+      </section>
 
       {/* Étapes détaillées */}
       <section className="py-24 md:py-32">

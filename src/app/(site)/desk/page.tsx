@@ -3,6 +3,7 @@ import { PageWrap } from "@/components/ui/PageWrap";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, SectionHead } from "@/components/ui/Section";
 import { DeskShowcase } from "@/components/desk/DeskShowcase";
+import { ContractJourney } from "@/components/desk/ContractJourney";
 import { ButtonLink } from "@/components/ui/Button";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { OMEGA_THRESHOLDS } from "@/lib/omega/engine";
@@ -56,6 +57,10 @@ export default function DeskPage() {
             Démonstration : société, sites, fournisseurs, prix et consommations sont fictifs. Les actions sont simulées. Aucune donnée n&apos;est enregistrée.
           </p>
         </Container>
+      </section>
+
+      <section className="border-t border-[var(--line)]" aria-label="Cycle d'un contrat et alertes OMEGA">
+        <ContractJourney />
       </section>
 
       <section className="border-t border-[var(--line)] py-24 md:py-32">

@@ -128,7 +128,7 @@ export function FranceMap({
       )}
 
       {showLegend && (
-        <ul className="absolute bottom-2 left-2 grid gap-1.5 rounded-[3px] bg-ink-950/70 p-2.5 text-[11px] text-fg-2 backdrop-blur" aria-label="Légende">
+        <ul className="absolute right-2 top-2 grid gap-1.5 rounded-[3px] bg-ink-950/70 p-2.5 text-[11px] text-fg-2 backdrop-blur" aria-label="Légende">
           {([3, 2, 1, 0] as const).map((l) => (
             <li key={l} className="flex items-center gap-2">
               <span className="size-2 rounded-full" style={{ background: LEVEL_COLOR[l] }} />

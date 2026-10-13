@@ -10,6 +10,28 @@ const securityHeaders = [
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
 ];
 
+/**
+ * Content-Security-Policy (production) : uniquement des ressources du site lui-même.
+ * Les scripts en ligne de Next.js (flux RSC) imposent 'unsafe-inline' tant que les pages
+ * restent statiques (un nonce imposerait un rendu dynamique de chaque page).
+ */
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob:",
+  "font-src 'self'",
+  "connect-src 'self'",
+  "media-src 'self'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'none'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+if (process.env.NODE_ENV === "production") securityHeaders.push({ key: "Content-Security-Policy", value: csp });
+
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,

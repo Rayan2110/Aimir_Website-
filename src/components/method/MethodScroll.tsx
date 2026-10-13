@@ -201,8 +201,11 @@ function VisualConsultation() {
         <text x="150" y="186" textAnchor="middle" fill="var(--color-fg)" fontSize="16" fontFamily="var(--font-sans)" letterSpacing="3">
           INENCO
         </text>
-        <text x="150" y="206" textAnchor="middle" fill="var(--color-fg-3)" fontSize="10" fontFamily="var(--font-mono)" letterSpacing="2">
-          CAHIER DES CHARGES
+        <text x="150" y="204" textAnchor="middle" fill="var(--color-fg-3)" fontSize="8.5" fontFamily="var(--font-mono)" letterSpacing="1.5">
+          CAHIER DES
+        </text>
+        <text x="150" y="215" textAnchor="middle" fill="var(--color-fg-3)" fontSize="8.5" fontFamily="var(--font-mono)" letterSpacing="1.5">
+          CHARGES COMMUN
         </text>
       </g>
       {nodes.map(([x, y], i) => (

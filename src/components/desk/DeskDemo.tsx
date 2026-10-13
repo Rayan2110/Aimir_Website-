@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { demoPortfolio } from "@/content/demo/desk-demo";
-import { ENERGY_LABEL, type DeskAlert } from "@/lib/desk/types";
+import { ENERGY_LABEL, type DeskAlert, type EnergyContract } from "@/lib/desk/types";
 import { daysBetween, formatDateFR, runOmega, siteStatus } from "@/lib/omega/engine";
 import { LogoMark } from "@/components/brand/Logo";
 import { FranceMap } from "./FranceMap";
@@ -15,13 +15,15 @@ import { LEVEL_COLOR, STATUS_LABEL, compactEur, last12, nf, portfolioTotals } fr
 import { cn } from "@/lib/cn";
 import { CountUp } from "@/components/motion/CountUp";
 
-type View = "overview" | "sites" | "timeline" | "documents" | "alerts";
+type View = "overview" | "sites" | "timeline" | "documents" | "studies" | "suppliers" | "alerts";
 
 const VIEWS: { id: View; label: string; icon: React.ReactNode }[] = [
   { id: "overview", label: "Vue d'ensemble", icon: <path d="M2 2h5v5H2zM9 2h5v3H9zM9 7h5v7H9zM2 9h5v5H2z" /> },
   { id: "sites", label: "Carte des sites", icon: <path d="M8 14s5-4.5 5-8.5A5 5 0 003 5.5C3 9.5 8 14 8 14zM8 7.5a2 2 0 100-4 2 2 0 000 4z" /> },
   { id: "timeline", label: "Échéancier", icon: <path d="M2 4h12M2 8h12M2 12h12M5 2v4M10 6v4M7 10v4" /> },
   { id: "documents", label: "Documents", icon: <path d="M4 1.5h5l3 3V14.5H4zM9 1.5v3h3M6 8h4M6 10.5h4" /> },
+  { id: "studies", label: "Études réalisées", icon: <path d="M2.5 13.5h11M4 11V7M7 11V4M10 11V8M13 11V5.5" /> },
+  { id: "suppliers", label: "Fournisseurs", icon: <path d="M2 13.5V6l6-3.5L14 6v7.5M5.5 13.5v-4h5v4M2 13.5h12" /> },
   { id: "alerts", label: "Alertes", icon: <path d="M8 2a4 4 0 00-4 4v3l-1.5 2.5h11L12 9V6a4 4 0 00-4-4zM6.5 13.5a1.5 1.5 0 003 0" /> },
 ];
 
@@ -34,6 +36,38 @@ export function DeskDemo({ initialView = "overview", embedded = false }: { initi
   const [toast, setToast] = useState<string | null>(null);
 
   const site = p.sites.find((s) => s.id === siteId) ?? null;
+
+  const studies = useMemo(
+    () =>
+      p.documents
+        .filter((d) => d.type === "etude")
+        .map((doc) => {
+          const st = p.sites.find((x) => x.id === doc.siteId);
+          const soon = st ? siteStatus(st, p.asOf).level >= 2 : false;
+          return {
+            doc,
+            site: st,
+            energies: st ? st.contracts.map((c) => ENERGY_LABEL[c.energy]).join(" + ") : "—",
+            status: soon ? "En cours" : "Archivée",
+          };
+        }),
+    [p],
+  );
+
+  const suppliers = useMemo(() => {
+    const map = new Map<string, { name: string; contracts: number; sites: Set<string>; elec: number; gas: number; next: EnergyContract | null }>();
+    for (const s of p.sites)
+      for (const c of s.contracts) {
+        const e = map.get(c.supplier) ?? { name: c.supplier, contracts: 0, sites: new Set<string>(), elec: 0, gas: 0, next: null };
+        e.contracts++;
+        e.sites.add(s.id);
+        if (c.energy === "electricite") e.elec++;
+        else e.gas++;
+        if (daysBetween(p.asOf, c.end) >= 0 && (!e.next || c.end < e.next.end)) e.next = c;
+        map.set(c.supplier, e);
+      }
+    return [...map.values()].map((e) => ({ ...e, sites: e.sites.size })).sort((a, b) => b.contracts - a.contracts);
+  }, [p]);
   const alertCount = { 1: 0, 2: 0, 3: 0 } as Record<1 | 2 | 3, number>;
   alerts.forEach((a) => alertCount[a.level]++);
 
@@ -89,7 +123,7 @@ export function DeskDemo({ initialView = "overview", embedded = false }: { initi
           ))}
           <div className="mt-auto hidden border-t border-[var(--line)] pt-3 lg:block">
             <p className="px-3 font-mono text-[9.5px] uppercase tracking-[0.14em] text-fg-3">Bientôt</p>
-            {["Études réalisées", "Utilisateurs & droits", "Exports"].map((l) => (
+            {["Utilisateurs & droits", "Exports", "Notifications"].map((l) => (
               <span key={l} className="block px-3 py-1.5 text-[12.5px] text-fg-3/70">
                 {l}
               </span>
@@ -231,6 +265,97 @@ export function DeskDemo({ initialView = "overview", embedded = false }: { initi
               {view === "documents" && (
                 <Card>
                   <DocumentsCenter documents={p.documents} sites={p.sites} onOpen={(d) => notify(`Démonstration — « ${d.title} » : le document s'ouvrirait ici dans l'espace client.`)} />
+                </Card>
+              )}
+
+              {view === "studies" && (
+                <Card>
+                  <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+                    <div>
+                      <p className="text-[15px] tracking-tight">Études réalisées</p>
+                      <p className="text-[12px] text-fg-3">Chaque étude comparative archivée, avec sa date et ses hypothèses</p>
+                    </div>
+                    <span className="num font-mono text-[10.5px] uppercase tracking-[0.12em] text-fg-3">{studies.length} études</span>
+                  </div>
+                  <div className="thin-scrollbar overflow-x-auto">
+                    <table className="w-full min-w-[620px] text-left text-[13px]">
+                      <thead className="font-mono text-[10px] uppercase tracking-[0.1em] text-fg-3">
+                        <tr className="border-b border-[var(--line)]">
+                          <th className="py-2 font-normal">Date</th>
+                          <th className="font-normal">Site</th>
+                          <th className="font-normal">Énergies étudiées</th>
+                          <th className="font-normal">Statut</th>
+                          <th className="font-normal" />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {studies.map(({ doc, site: st, energies, status }) => (
+                          <tr key={doc.id} className="border-b border-[var(--line)] hover:bg-fg/[0.03]">
+                            <td className="num py-2.5 pr-3 font-mono text-[11px] text-fg-3">{formatDateFR(doc.date)}</td>
+                            <td className="pr-3 text-fg">{st?.name}</td>
+                            <td className="pr-3 text-fg-2">{energies}</td>
+                            <td className="pr-3">
+                              <span className={cn("rounded-[2px] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em]", status === "En cours" ? "bg-volt/15 text-volt" : "bg-fg/5 text-fg-2")}>{status}</span>
+                            </td>
+                            <td className="text-right">
+                              <button type="button" onClick={() => notify(`Démonstration — « ${doc.title} » s'ouvrirait ici, au format de l'étude-type.`)} className="font-mono text-[10.5px] uppercase tracking-[0.12em] text-volt hover:text-volt-2">
+                                Ouvrir →
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </Card>
+              )}
+
+              {view === "suppliers" && (
+                <Card>
+                  <div className="mb-4">
+                    <p className="text-[15px] tracking-tight">Fournisseurs</p>
+                    <p className="text-[12px] text-fg-3">Répartition de vos contrats actifs par fournisseur</p>
+                  </div>
+                  <div className="thin-scrollbar overflow-x-auto">
+                    <table className="w-full min-w-[620px] text-left text-[13px]">
+                      <thead className="font-mono text-[10px] uppercase tracking-[0.1em] text-fg-3">
+                        <tr className="border-b border-[var(--line)]">
+                          <th className="py-2 font-normal">Fournisseur</th>
+                          <th className="text-right font-normal">Contrats</th>
+                          <th className="text-right font-normal">Sites</th>
+                          <th className="font-normal">Énergies</th>
+                          <th className="font-normal">Prochaine échéance</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {suppliers.map((sp) => (
+                          <tr key={sp.name} className="border-b border-[var(--line)]">
+                            <td className="py-2.5 pr-3 text-fg">{sp.name}</td>
+                            <td className="num pr-3 text-right text-fg-2">{sp.contracts}</td>
+                            <td className="num pr-3 text-right text-fg-2">{sp.sites}</td>
+                            <td className="pr-3">
+                              <span className="flex items-center gap-2 text-fg-2">
+                                {sp.elec > 0 && (
+                                  <span className="flex items-center gap-1">
+                                    <span className="size-2 rounded-[2px] bg-elec" /> {sp.elec} élec.
+                                  </span>
+                                )}
+                                {sp.gas > 0 && (
+                                  <span className="flex items-center gap-1">
+                                    <span className="size-2 rounded-[2px] bg-gas" /> {sp.gas} gaz
+                                  </span>
+                                )}
+                              </span>
+                            </td>
+                            <td className="num font-mono text-[11px] text-fg-2">
+                              {sp.next ? `${formatDateFR(sp.next.end)} · J-${daysBetween(p.asOf, sp.next.end)}` : "—"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="mt-4 text-[12px] text-fg-3">Fournisseurs anonymisés pour la démonstration.</p>
                 </Card>
               )}
 

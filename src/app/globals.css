@@ -607,3 +607,22 @@ html.lenis body {
     transform: scaleX(0);
   }
 }
+
+/* Courbe de charge sectorielle : tracé qui se dessine à l'apparition */
+.load-curve .lc-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.2s var(--ease-out-expo) 0.2s;
+}
+.load-curve .lc-area,
+.load-curve .lc-peak {
+  opacity: 0;
+  transition: opacity 1s ease 1.2s;
+}
+.load-curve[data-in] .lc-line {
+  stroke-dashoffset: 0;
+}
+.load-curve[data-in] .lc-area,
+.load-curve[data-in] .lc-peak {
+  opacity: 1;
+}

@@ -5,6 +5,15 @@ import { LEGAL_VERSION, site } from "@/content/site";
 
 const fail = (status: number, error: string) => NextResponse.json({ ok: false, error }, { status });
 
+/** Réception non configurée (aperçu en ligne sans SMTP) ou panne d'envoi : message honnête. */
+const unavailable = (reason: "not-configured" | "failed") =>
+  fail(
+    503,
+    reason === "not-configured"
+      ? `Version de démonstration : l'envoi en ligne sera activé à l'ouverture du site. Aucune donnée n'a été transmise. En attendant, écrivez-nous à ${site.contact.email}.`
+      : `Service momentanément indisponible. Écrivez-nous à ${site.contact.email}.`,
+  );
+
 export async function POST(request: NextRequest) {
   if (!sameOrigin(request.headers)) return fail(403, "Origine non autorisée.");
 
@@ -61,9 +70,7 @@ export async function POST(request: NextRequest) {
         ["Textes acceptés", `Conditions générales et politique de confidentialité, version ${LEGAL_VERSION}`],
       ],
     });
-    if (!result.ok) {
-      return fail(503, `Service momentanément indisponible. Écrivez-nous à ${site.contact.email}.`);
-    }
+    if (!result.ok) return unavailable(result.reason);
     return NextResponse.json({ ok: true, reference });
   }
 
@@ -93,9 +100,7 @@ export async function POST(request: NextRequest) {
         ["Information fournie", `Politique de confidentialité, version ${LEGAL_VERSION}`],
       ],
     });
-    if (!result.ok) {
-      return fail(503, `Service momentanément indisponible. Écrivez-nous à ${site.contact.email}.`);
-    }
+    if (!result.ok) return unavailable(result.reason);
     return NextResponse.json({ ok: true, reference });
   }
 

@@ -48,6 +48,7 @@ export function ContractTimeline({ contract, asOf, compact = false }: { contract
         {/* jalons */}
         {[
           { t: start, label: "Signature", date: contract.start },
+          { t: start + (windowStart - start) / 2, label: "Suivi" },
           { t: windowStart, label: "Anticipation" },
           { t: end, label: "Échéance", date: contract.end },
         ].map((m, i) => (

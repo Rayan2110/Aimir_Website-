@@ -4,6 +4,8 @@ import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { Cursor } from "@/components/motion/Cursor";
 import { Suspense } from "react";
+import { MobileCta } from "@/components/layout/MobileCta";
+import { ScrollEnergyLine } from "@/components/motion/ScrollEnergyLine";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,6 +19,10 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll />
       </Suspense>
       <RevealObserver />
+      <ScrollEnergyLine />
+      <Suspense fallback={null}>
+        <MobileCta />
+      </Suspense>
       <Cursor />
     </>
   );

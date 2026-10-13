@@ -5,6 +5,7 @@ import { PageWrap } from "@/components/ui/PageWrap";
 import { PageHero } from "@/components/layout/PageHero";
 import { Container, SectionHead } from "@/components/ui/Section";
 import { SectorIcon } from "@/components/sectors/SectorIcon";
+import { LoadCurve } from "@/components/sectors/LoadCurve";
 import { CtaBand } from "@/components/ui/CtaBand";
 import { getSector, sectors } from "@/content/sectors";
 
@@ -67,11 +68,28 @@ export default async function SectorPage({ params }: { params: Promise<{ slug: s
         </Container>
       </section>
 
+      <section className="border-t border-[var(--line)] py-24 md:py-32">
+        <Container className="grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-4">
+            <p className="eyebrow mb-6">
+              <span className="text-volt">02</span> — Profil de charge
+            </p>
+            <h2 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Quand votre site consomme</h2>
+            <p className="mt-5 text-[16px] leading-relaxed text-fg-2">
+              Les pointes déterminent la puissance souscrite et le poids des heures pleines et creuses. C&apos;est l&apos;un des premiers éléments que nous regardons.
+            </p>
+          </div>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <LoadCurve icon={s.icon} />
+          </div>
+        </Container>
+      </section>
+
       <section className="on-paper py-24 md:py-32">
         <Container className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="eyebrow mb-6">
-              <span className="text-volt-deep">02</span> — Notre analyse
+              <span className="text-volt-deep">03</span> — Notre analyse
             </p>
             <h2 className="display text-[clamp(2.2rem,4vw,3.6rem)]">Ce que nous regardons en priorité</h2>
           </div>

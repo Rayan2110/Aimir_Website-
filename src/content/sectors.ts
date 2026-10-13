@@ -25,7 +25,7 @@ export type Sector = {
 export const sectors: Sector[] = [
   {
     slug: "restaurants",
-    name: "Restaurants",
+    name: "Restaurants & cafés",
     short: "Cuisson, froid, amplitude horaire",
     icon: "restaurant",
     energies: ["Électricité", "Gaz"],
