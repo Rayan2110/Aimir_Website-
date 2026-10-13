@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# INENCO ENERGY — site web
 
-## Getting Started
+Site du cabinet de courtage et d'optimisation énergétique **INENCO ENERGY**.
+*Analyse. Consultation. Décision. Suivi.*
 
-First, run the development server:
+- Site vitrine premium : motion design, relief énergétique animé, méthode en défilement scénarisé.
+- **Dépôt de facture** : glisser-déposer, formulaire court en deux étapes, envoi chiffré, référence de dossier.
+- **Démonstration d'INENCO ENERGY DESK** : carte des sites, échéancier, documents, alertes OMEGA. Toutes les données sont fictives.
+- **Cartes de visite** : version numérique (`/carte/[nom]`) avec vCard et QR code, et planche d'impression (`/carte/impression`).
+- Pages légales complètes : mentions légales, confidentialité, conditions générales, cookies, accessibilité, rémunération.
+
+Documents de projet :
+
+- [`docs/CADRAGE.md`](docs/CADRAGE.md) : réponse au §24 du brief (compréhension, arborescence, parcours, MVP / phase 2, idées, risques).
+- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) : architecture technique, modèle de données, back-office, sécurité et RGPD.
+- [`docs/A-COMPLETER.md`](docs/A-COMPLETER.md) : informations à fournir par les fondateurs avant la mise en ligne.
+
+## Démarrer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # facultatif en local
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```bash
+npm run build && npm start   # build de production
+npm run lint
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+En développement, sans SMTP configuré, les dossiers déposés sont écrits dans `.data/dossiers/`. Ce dossier est ignoré par git.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+| Élément | Choix |
+|---|---|
+| Framework | Next.js 16 (App Router, Cache Components, Turbopack), React 19.3 |
+| Styles | Tailwind CSS v4, design tokens dans `src/app/globals.css` |
+| Animations | Canvas 2D maison (relief énergétique), GSAP + ScrollTrigger, Lenis, Motion, View Transitions |
+| Formulaires | Zod (schéma partagé client / serveur), route `POST /api/dossier` |
+| E-mail | Nodemailer via le SMTP de l'entreprise : aucune API payante |
+| QR codes | `qrcode`, généré côté serveur en SVG vectoriel |
 
-To learn more about Next.js, take a look at the following resources:
+Aucune API ni aucun service payant n'est activé (brief §22).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Arborescence
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/
+    (site)/            pages publiques (en-tête + pied de page)
+    carte/             cartes de visite numériques + planche d'impression
+    api/dossier/       réception des factures et messages
+  components/          UI, animations, DESK, simulateur, dépôt de facture
+  content/             textes, secteurs, FAQ, équipe, données de démo
+  lib/
+    desk/types.ts      modèle de données de l'espace client
+    omega/engine.ts    règles OMEGA ENERGY (alertes explicables)
+    dossier/           schéma de validation + réception serveur
+    geo/, terrain.ts   carte de France, relief de marque
+docs/                  cadrage, architecture, informations à compléter
+```
 
-## Deploy on Vercel
+## Mise en ligne
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Renseigner les valeurs `TODO` de `src/content/site.ts` et `src/content/team.ts` (voir `docs/A-COMPLETER.md`).
+2. Configurer les variables d'environnement (`.env.example`).
+3. Faire valider les pages légales par un avocat.
+4. Déployer sur un hébergeur Node.js. Un hébergement dans l'UE est recommandé pour les documents.
