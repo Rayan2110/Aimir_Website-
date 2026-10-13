@@ -31,7 +31,7 @@ export default function HomePage() {
             <div className="lg:col-span-9">
               <ScrubText
                 className="text-[clamp(1.7rem,3.4vw,3.3rem)] leading-[1.12] tracking-[-0.025em]"
-                text="Prix fixes, offres indexées, acheminement, taxes, échéances, reconductions tacites : l'énergie professionnelle est devenue *illisible.* INENCO la rend *lisible,* consulte le marché pour vous et vous laisse *décider.*"
+                text="Prix fixes, offres indexées, acheminement, taxes, échéances, reconductions tacites : l'énergie professionnelle est devenue *illisible.* INENCO la rend *lisible,* consulte pour vous un panel de fournisseurs et vous laisse *décider.*"
               />
             </div>
           </div>

@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Section";
 export const metadata: Metadata = {
   title: "Envoyer une facture",
   description:
-    "Déposez votre facture d'électricité ou de gaz (PDF ou photo) : un analyste INENCO ENERGY étudie votre contrat et consulte les fournisseurs. Sans frais facturés, sans engagement.",
+    "Déposez votre facture d'électricité ou de gaz (PDF ou photo) : un analyste INENCO ENERGY étudie votre contrat et consulte les fournisseurs. Sans engagement ; INENCO est rémunéré par le fournisseur retenu.",
   alternates: { canonical: "/envoyer-une-facture" },
 };
 

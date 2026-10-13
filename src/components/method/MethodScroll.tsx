@@ -287,7 +287,7 @@ function VisualMiseEnPlace() {
         );
       })}
       <text x="40" y="320" fill="var(--color-fg-3)" fontSize="11" fontFamily="var(--font-mono)" letterSpacing="1.5">
-        AUCUNE COUPURE · AUCUNE INTERVENTION SUR LE COMPTEUR
+        PAS DE COUPURE LIÉE AU CHANGEMENT DE FOURNISSEUR
       </text>
     </svg>
   );

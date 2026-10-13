@@ -22,7 +22,6 @@ export function ContactForm() {
     phone: "",
     email: "",
     message: "",
-    consent: false,
     noMarketing: false,
     website: "",
   });
@@ -37,7 +36,7 @@ export function ContactForm() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const payload = { kind: "contact" as const, ...v, consent: v.consent ? "on" : "", noMarketing: v.noMarketing ? "on" : "" };
+    const payload = { kind: "contact" as const, ...v, noMarketing: v.noMarketing ? "on" : "" };
     const res = contactSchema.safeParse(payload);
     if (!res.success) {
       const errs: Record<string, string> = {};
@@ -119,7 +118,7 @@ export function ContactForm() {
         {field("company", "Entreprise", { optional: true, auto: "organization", full: true })}
         {field("firstName", "Prénom", { auto: "given-name" })}
         {field("lastName", "Nom", { auto: "family-name" })}
-        {field("phone", "Téléphone", { type: "tel", auto: "tel" })}
+        {field("phone", "Téléphone", { type: "tel", auto: "tel", optional: true })}
         {field("email", "E-mail professionnel", { type: "email", auto: "email" })}
         <div className="md:col-span-2">
           <label htmlFor={`${uid}-message`} className="mb-1.5 block text-[13px] text-fg-2">
@@ -138,12 +137,7 @@ export function ContactForm() {
         </div>
       </div>
       <input type="text" name="website" tabIndex={-1} autoComplete="off" value={v.website} onChange={(e) => set("website", e.target.value)} className="absolute left-[-9999px] h-0 w-0 opacity-0" aria-hidden />
-      <label className="mt-5 flex cursor-pointer items-start gap-3 text-[13px] leading-snug text-fg-2">
-        <input type="checkbox" checked={v.consent} onChange={(e) => set("consent", e.target.checked)} className="mt-0.5 size-4 shrink-0 accent-[var(--color-volt)]" />
-        <span>J&apos;autorise {site.name} à utiliser ces informations pour répondre à ma demande.</span>
-      </label>
-      {errors.consent && <p className="mt-1.5 text-[12px] text-crit">{errors.consent}</p>}
-      <label className="mt-3 flex cursor-pointer items-start gap-3 text-[13px] leading-snug text-fg-3">
+      <label className="mt-5 flex cursor-pointer items-start gap-3 text-[13px] leading-snug text-fg-3">
         <input type="checkbox" checked={v.noMarketing} onChange={(e) => set("noMarketing", e.target.checked)} className="mt-0.5 size-4 shrink-0 accent-[var(--color-volt)]" />
         <span>Je ne souhaite pas recevoir d&apos;informations commerciales de la part de {site.name}.</span>
       </label>

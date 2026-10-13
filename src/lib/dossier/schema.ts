@@ -59,8 +59,6 @@ const identity = {
   firstName: z.string().trim().min(1, "Prénom requis").max(80),
   lastName: z.string().trim().min(1, "Nom requis").max(80),
   email: z.email("Adresse e-mail invalide").max(160),
-  phone,
-  consent: z.literal("on", "Cette autorisation est nécessaire pour traiter votre demande"),
   /** Opposition à la prospection commerciale (case décochée par défaut). */
   noMarketing: z
     .string()
@@ -74,6 +72,9 @@ export const invoiceSchema = z.object({
   kind: z.literal("facture"),
   company: z.string().trim().min(2, "Raison sociale requise").max(160),
   ...identity,
+  phone,
+  /** Mandat : autorisation de réaliser l'étude et de transmettre les données nécessaires aux fournisseurs. */
+  consent: z.literal("on", "Cette autorisation est nécessaire pour réaliser votre étude"),
   siret: z
     .string()
     .trim()
@@ -95,6 +96,12 @@ export const contactSchema = z.object({
   kind: z.literal("contact"),
   company: z.string().trim().max(160).optional().default(""),
   ...identity,
+  phone: z
+    .string()
+    .trim()
+    .optional()
+    .default("")
+    .refine((v) => v === "" || (v.replace(/\D/g, "").length >= 9 && /^[+\d\s().-]+$/.test(v)), "Numéro de téléphone invalide"),
   subject: z.enum(["etude", "multi-sites", "desk", "partenariat", "autre"]).default("autre"),
   message: z.string().trim().min(10, "Votre message est un peu court").max(4000),
 });

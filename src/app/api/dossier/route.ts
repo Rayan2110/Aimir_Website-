@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { CONTACT_SUBJECTS, ENERGIES, contactSchema, invoiceSchema } from "@/lib/dossier/schema";
 import { clientIp, deliver, newReference, rateLimited, readFiles, sameOrigin } from "@/lib/dossier/server";
-import { site } from "@/content/site";
+import { LEGAL_VERSION, site } from "@/content/site";
 
 const fail = (status: number, error: string) => NextResponse.json({ ok: false, error }, { status });
 
@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
         ["Fichiers", read.files.map((f) => `${f.name} (${Math.round(f.size / 1024)} Ko)`).join(", ")],
         ["Autorisation étude / transmission fournisseurs", "Oui (case cochée en ligne)"],
         ["Opposition à la prospection", d.noMarketing ? "OUI — ne pas prospecter" : "Non"],
+        ["Textes acceptés", `Conditions générales et politique de confidentialité, version ${LEGAL_VERSION}`],
       ],
     });
     if (!result.ok) {
@@ -88,8 +89,8 @@ export async function POST(request: NextRequest) {
         ["Téléphone", d.phone],
         ["E-mail", d.email],
         ["Message", d.message],
-        ["Autorisation de traitement", "Oui (case cochée en ligne)"],
         ["Opposition à la prospection", d.noMarketing ? "OUI — ne pas prospecter" : "Non"],
+        ["Information fournie", `Politique de confidentialité, version ${LEGAL_VERSION}`],
       ],
     });
     if (!result.ok) {

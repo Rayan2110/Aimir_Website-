@@ -7,7 +7,7 @@ export const faq: FaqGroup[] = [
     items: [
       {
         q: "Combien coûte l'accompagnement INENCO ?",
-        a: "Aucun frais ne vous est facturé par INENCO. Nous sommes rémunérés par le fournisseur retenu, via une commission incluse dans le prix de son offre. Les offres que nous vous présentons sont donc comparées commission comprise, et c'est ce prix que vous payez.",
+        a: "INENCO ne vous adresse aucune facture. Nous sommes rémunérés par le fournisseur retenu, via une commission incluse dans le prix de son offre : c'est donc vous qui la payez, à travers ce prix. Les offres que nous vous présentons sont comparées commission comprise. Son niveau peut varier d'un fournisseur à l'autre ; votre conseiller vous l'indique sur demande.",
       },
       {
         q: "Suis-je engagé en envoyant ma facture ?",
@@ -15,7 +15,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: "Me proposerez-vous forcément une nouvelle offre ?",
-        a: "Non. Nous ne vous présentons une proposition que si elle améliore votre situation actuelle, en prix ou en conditions. Si votre contrat est déjà bien placé, nous vous le disons.",
+        a: "Non. Nous ne vous présentons une proposition que si, à la date de l'étude et sur une base identique, elle améliore votre situation en prix ou en conditions. Si votre contrat est déjà bien placé, nous vous le disons. Ce n'est pas une garantie d'économies : le marché et votre consommation peuvent évoluer.",
       },
       {
         q: "Avec quels fournisseurs travaillez-vous ?",
@@ -32,7 +32,7 @@ export const faq: FaqGroup[] = [
     items: [
       {
         q: "Y a-t-il un risque de coupure ?",
-        a: "Non. Le changement de fournisseur est un changement purement contractuel. Le réseau, le compteur et la qualité de l'approvisionnement ne changent pas, et aucune intervention technique n'est nécessaire.",
+        a: "Le changement de fournisseur, à lui seul, n'entraîne pas de coupure : c'est un changement contractuel. Le réseau, le compteur et la qualité de l'approvisionnement restent les mêmes, et aucune intervention technique n'est en règle générale nécessaire.",
       },
       {
         q: "Dois-je résilier mon contrat actuel ?",
@@ -40,7 +40,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: "Qui s'occupe des démarches ?",
-        a: "Nous préparons le dossier de souscription, vérifions les informations du site (PDL pour l'électricité, PCE pour le gaz) et suivons l'activation du contrat. Vous n'avez qu'à valider l'offre choisie.",
+        a: "Nous préparons le dossier de souscription, vérifions les informations du site (PDL pour l'électricité, PCE pour le gaz) et suivons l'activation du contrat. Vous vérifiez les documents et vous signez.",
       },
       {
         q: "Je suis au tarif réglementé. Est-ce que ça vous concerne ?",
@@ -52,11 +52,11 @@ export const faq: FaqGroup[] = [
       },
       {
         q: "Puis-je changer d'avis après avoir signé ?",
-        a: "Si votre entreprise compte 5 salariés au plus et que le contrat est conclu hors établissement (par exemple lors d'un rendez-vous dans vos locaux) pour un service qui n'entre pas dans votre activité principale, vous bénéficiez d'un délai de rétractation de 14 jours (article L.221-3 du Code de la consommation). Le détail figure dans nos conditions générales.",
+        a: "Si votre entreprise compte 5 salariés au plus et que le contrat est conclu hors établissement (par exemple lors d'un rendez-vous dans vos locaux) pour un service qui n'entre pas dans votre activité principale, vous bénéficiez d'un délai de rétractation de 14 jours (article L.221-3 du Code de la consommation). Il s'applique au mandat confié à INENCO comme au contrat de fourniture, auprès du fournisseur. Le détail et le formulaire figurent dans nos conditions générales.",
       },
       {
         q: "En cas de litige avec mon fournisseur, qui contacter ?",
-        a: "Adressez d'abord une réclamation écrite à votre fournisseur. Si votre entreprise compte moins de 10 personnes et réalise au plus 2 M€ de chiffre d'affaires, vous pouvez ensuite saisir gratuitement le Médiateur national de l'énergie. Le site energie-info.fr, service public d'information, détaille vos droits. Nous vous accompagnons dans ces démarches.",
+        a: "Adressez d'abord une réclamation écrite à votre fournisseur. Si votre entreprise compte moins de 10 personnes et que son chiffre d'affaires, ses recettes ou son total de bilan annuels n'excèdent pas 2 M€, vous pouvez ensuite saisir gratuitement le Médiateur national de l'énergie. Le site energie-info.fr, service public d'information, détaille vos droits. Nous vous accompagnons dans ces démarches.",
       },
     ],
   },
@@ -69,7 +69,7 @@ export const faq: FaqGroup[] = [
       },
       {
         q: "Que faites-vous de ma facture ?",
-        a: "Elle sert uniquement à préparer votre étude. Elle est transmise de façon chiffrée, n'est accessible qu'à l'équipe INENCO chargée de votre dossier et n'est conservée que pendant la durée nécessaire. Le détail figure dans notre politique de confidentialité.",
+        a: "Elle sert à préparer votre étude. Transmise de façon chiffrée, elle n'est accessible qu'à l'équipe chargée de votre dossier et à nos prestataires techniques ; seules les données nécessaires à leur proposition (consommation, caractéristiques du site) sont communiquées aux fournisseurs consultés. Sans suite, elle est supprimée au plus tard 12 mois après réception. Le détail figure dans notre politique de confidentialité.",
       },
       {
         q: "Vos études sont-elles faites par une intelligence artificielle ?",

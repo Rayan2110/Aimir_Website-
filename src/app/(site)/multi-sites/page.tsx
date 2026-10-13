@@ -17,7 +17,7 @@ const STEPS = [
   { t: "Inventaire", d: "Nous recensons chaque site, chaque point de livraison (PDL, PCE), chaque contrat et chaque échéance, à partir de vos factures." },
   { t: "Consolidation", d: "Consommations, dépenses et calendrier des échéances sont réunis dans une seule lecture, site par site et au global." },
   { t: "Stratégie d'achat", d: "Consultation groupée ou site par site, alignement progressif des échéances : nous construisons le scénario adapté à votre périmètre." },
-  { t: "Pilotage", d: "Suivi continu, alertes avant chaque fenêtre de renouvellement, centre documentaire partagé avec vos équipes." },
+  { t: "Pilotage", d: "Suivi continu, alertes avant chaque fenêtre de renouvellement et, à l'ouverture du Desk, centre documentaire partagé avec vos équipes." },
 ];
 
 export default function MultiSitesPage() {

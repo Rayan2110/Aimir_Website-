@@ -28,9 +28,9 @@ const PROFILES = [
     label: "Hôtel",
     region: "Auvergne-Rhône-Alpes",
     energy: "Gaz naturel",
-    segment: "Profil T2",
+    segment: "Profil T3",
     mwh: { min: 150, max: 900, default: 520 },
-    current: { structure: "Prix fixe", price: 64, end: "11/2026", conditions: ["Échéance dans moins de 60 jours", "Offre de continuité si non renouvelé", "Facturation mensuelle"] },
+    current: { structure: "Prix fixe", price: 64, end: "11/2026", conditions: ["Échéance proche", "Offre de continuité si non renouvelé", "Facturation mensuelle"] },
     proposal: { structure: "Prix fixe", price: 52, duration: "36 mois", conditions: ["Prix ferme 36 mois", "Tolérance de volume ± 25 %", "Facturation mensuelle sur relevé"] },
     consulted: 6,
     received: 4,
@@ -40,7 +40,7 @@ const PROFILES = [
     label: "Copropriété",
     region: "Nouvelle-Aquitaine",
     energy: "Gaz — chaufferie collective",
-    segment: "Profil T2",
+    segment: "Profil T3",
     mwh: { min: 300, max: 1500, default: 780 },
     current: { structure: "Prix indexé", price: 71, end: "06/2027", conditions: ["Prix moyen constaté sur 12 mois", "Indexé sur le marché de gros", "Budget variable d'un mois à l'autre"] },
     proposal: { structure: "Prix fixe", price: 58, duration: "24 mois", conditions: ["Budget connu à l'avance pour l'AG", "Tolérance de volume ± 20 %", "Signature après vote en AG"] },
@@ -244,7 +244,7 @@ export function BeforeAfter() {
       </div>
 
       <p className="border-t border-[var(--line)] px-5 py-4 text-[11.5px] leading-relaxed text-fg-3 md:px-8">
-        Exemple fictif à visée pédagogique, ne constituant pas une offre. Hypothèses : prix de la part énergie seule, en € HT/MWh, hors abonnement, acheminement (TURPE / ATRD), accise, CTA et TVA. Prix illustratifs, non indexés sur un marché réel. Les résultats réels varient selon le profil, la date de consultation et l&apos;état du marché et ne sont pas garantis.
+        Exemple fictif à visée pédagogique, ne constituant pas une offre. Hypothèses : prix de la part énergie seule, en € HT/MWh, hors abonnement, acheminement (TURPE / ATRD), accise, CTA et TVA. Prix illustratifs, non indexés sur un marché réel ; prix proposés commission du courtier incluse. Les résultats réels varient selon le profil, la date de consultation et l&apos;état du marché et ne sont pas garantis.
       </p>
     </div>
   );

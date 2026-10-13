@@ -19,14 +19,14 @@ const TREATMENTS = [
     data: "Identité et coordonnées professionnelles, entreprise, SIREN/SIRET, factures et informations qu'elles contiennent (adresse du site, PDL/PCE, consommations, prix, titulaire), énergie, nombre de sites, échéance.",
     purpose: "Analyser votre contrat, consulter des fournisseurs, vous présenter une étude comparative et vous recontacter.",
     basis: "Mesures précontractuelles prises à votre demande (art. 6.1.b RGPD).",
-    retention: "3 ans à compter de notre dernier échange. Une facture déposée sans suite est supprimée au plus tard 12 mois après sa réception.",
+    retention: "3 ans à compter de votre dernier contact. Une facture déposée sans suite est supprimée au plus tard 12 mois après sa réception.",
   },
   {
     name: "Demandes de contact",
     data: "Identité, coordonnées, entreprise, message.",
     purpose: "Répondre à votre demande.",
     basis: "Mesures précontractuelles ou intérêt légitime à répondre aux demandes (art. 6.1.b et 6.1.f).",
-    retention: "3 ans à compter de notre dernier échange.",
+    retention: "3 ans à compter de votre dernier contact.",
   },
   {
     name: "Suivi des clients et des contrats",
@@ -98,11 +98,24 @@ export default function ConfidentialitePage() {
           </table>
         </div>
         <p>
-          Les champs obligatoires des formulaires sont signalés : sans eux, nous ne pouvons pas traiter votre demande. Les autres sont facultatifs. Les données relatives à une personne morale (par exemple la consommation d&apos;un établissement) ne sont pas en elles-mêmes des données personnelles, mais nous leur appliquons le même niveau de protection.
+          Les champs obligatoires des formulaires sont signalés : sans eux, nous ne pouvons pas traiter votre demande. Les autres sont facultatifs. Les données relatives à une personne morale (par exemple la consommation d&apos;un établissement) ne sont pas en elles-mêmes des données personnelles, mais nous leur appliquons le même niveau de protection. Celles d&apos;un entrepreneur individuel sont, elles, des données personnelles.
         </p>
         <p>
           Lors du dépôt d&apos;une facture, vous pouvez masquer votre IBAN : il ne nous est pas utile.
         </p>
+
+        <h2>Données que nous ne collectons pas directement auprès de vous</h2>
+        <ul>
+          <li>
+            <strong>Factures déposées par un tiers</strong> (syndic, gestionnaire, collaborateur) : elles peuvent mentionner le titulaire du contrat. Celui-ci peut exercer ses droits auprès de nous dans les mêmes conditions.
+          </li>
+          <li>
+            <strong>Données de comptage</strong> des gestionnaires de réseau (Enedis, GRDF ou entreprises locales de distribution) : uniquement si vous signez une autorisation écrite et expresse, pour la durée de l&apos;étude et du suivi ; l&apos;autorisation est conservée pendant sa durée de validité puis 5 ans à titre de preuve.
+          </li>
+          <li>
+            <strong>Données publiques des entreprises</strong> (répertoire SIRENE) : pour vérifier l&apos;identité et l&apos;activité de l&apos;entreprise à partir du SIREN / SIRET.
+          </li>
+        </ul>
 
         <h2>Destinataires</h2>
         <ul>
@@ -119,7 +132,10 @@ export default function ConfidentialitePage() {
 
         <h2>Transferts hors de l&apos;Union européenne</h2>
         <p>
-          Nous privilégions des prestataires qui hébergent les données dans l&apos;Union européenne. Si un prestataire est établi hors de l&apos;Union européenne ou peut y accéder, le transfert est encadré par une décision d&apos;adéquation (par exemple le Data Privacy Framework UE–États-Unis pour les entreprises certifiées) ou par les clauses contractuelles types de la Commission européenne. La liste à jour des prestataires concernés est disponible sur simple demande.
+          Nous privilégions des prestataires qui hébergent les données dans l&apos;Union européenne. Si un prestataire est établi hors de l&apos;Union européenne ou peut y accéder, le transfert est encadré par une décision d&apos;adéquation (par exemple le Data Privacy Framework UE–États-Unis pour les entreprises certifiées) ou par les clauses contractuelles types de la Commission européenne.
+        </p>
+        <p>
+          Prestataires et garanties : <V>[À compléter]</V>. Vous pouvez obtenir une copie des garanties applicables auprès de {l.privacyContact}.
         </p>
 
         <h2>Sécurité</h2>

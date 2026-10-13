@@ -45,7 +45,7 @@ export default function MentionsLegalesPage() {
 
         <h2>Activité</h2>
         <p>
-          {l.companyName} exerce une activité d&apos;intermédiaire en fourniture d&apos;énergie (courtage) auprès des professionnels. {l.companyName} n&apos;est ni fournisseur d&apos;électricité ou de gaz, ni gestionnaire de réseau, et n&apos;est affilié à aucun organisme public. Les contrats de fourniture sont conclus directement entre le client et le fournisseur de son choix. Aucun frais n&apos;est facturé au client : {l.companyName} est rémunéré par le fournisseur retenu, via une commission incluse dans le prix de son offre (<Link href="/remuneration">en savoir plus</Link>).
+          {l.companyName} exerce une activité d&apos;intermédiaire en fourniture d&apos;énergie (courtage) auprès des professionnels. {l.companyName} n&apos;est ni fournisseur d&apos;électricité ou de gaz, ni gestionnaire de réseau, et n&apos;est affilié à aucun organisme public. Les contrats de fourniture sont conclus directement entre le client et le fournisseur de son choix. {l.companyName} n&apos;adresse aucune facture au client : il est rémunéré par le fournisseur retenu, via une commission incluse dans le prix de son offre (<Link href="/remuneration">en savoir plus</Link>).
         </p>
 
         <h2>Propriété intellectuelle</h2>

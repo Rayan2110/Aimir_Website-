@@ -12,7 +12,7 @@ export function Footer() {
           <div className="lg:col-span-5">
             <p className="eyebrow mb-6">Une question, une facture ?</p>
             <p className="max-w-md text-[28px] leading-[1.15] tracking-tight">
-              Envoyez-nous votre facture. Nous vous montrons ce que le marché peut vous proposer.
+              Envoyez-nous votre facture. Nous vous montrons ce que les fournisseurs consultés peuvent vous proposer.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="/envoyer-une-facture">Analyser ma facture</ButtonLink>
@@ -64,7 +64,7 @@ export function Footer() {
 
         <div className="mt-20 border-t border-[var(--line)] pt-6 text-[12px] leading-relaxed text-fg-3">
           <p className="max-w-4xl">
-            {site.name} est un intermédiaire en fourniture d&apos;énergie (courtier). Il n&apos;est ni fournisseur d&apos;électricité ou de gaz, ni gestionnaire de réseau, et n&apos;est affilié à aucun organisme public. Aucun frais n&apos;est facturé au client : INENCO est rémunéré par le fournisseur retenu, via une commission incluse dans le prix de son offre. Les exemples chiffrés présentés sur ce site sont illustratifs et ne constituent pas une offre.{" "}
+            {site.name} est un intermédiaire en fourniture d&apos;énergie (courtier). Il n&apos;est ni fournisseur d&apos;électricité ou de gaz, ni gestionnaire de réseau, et n&apos;est affilié à aucun organisme public. INENCO n&apos;adresse aucune facture à ses clients : il est rémunéré par le fournisseur retenu, via une commission incluse dans le prix de son offre. Les exemples chiffrés présentés sur ce site sont illustratifs et ne constituent pas une offre.{" "}
             <Link href="/remuneration" className="underline underline-offset-2 hover:text-fg-2">
               Comment sommes-nous rémunérés ?
             </Link>

@@ -8,13 +8,13 @@ import { CtaBand } from "@/components/ui/CtaBand";
 export const metadata: Metadata = {
   title: "Études de cas",
   description:
-    "Le format des études comparatives INENCO ENERGY : contrat actuel, consultation, nouvelle proposition, écart estimé et méthodologie visible. Études anonymisées publiées avec l'accord des clients.",
+    "Le format des études comparatives INENCO ENERGY : contrat actuel, consultation, nouvelle proposition, écart estimé et méthodologie visible. Études réelles anonymisées à venir, publiées avec l'accord des clients.",
   alternates: { canonical: "/etudes-de-cas" },
 };
 
 const METHOD = [
   ["Base de consommation", "Consommation annuelle issue de vos factures ou de votre historique, la même pour toutes les offres comparées."],
-  ["Périmètre comparé", "Part énergie et abonnement, hors acheminement, taxes et TVA, qui sont identiques chez tous les fournisseurs."],
+  ["Périmètre comparé", "Prix de l'énergie (part mise en concurrence), commission du courtier incluse. L'abonnement, l'acheminement, les taxes et la TVA sont présentés à part : ils sont en grande partie réglementés."],
   ["Date des prix", "Les prix des fournisseurs ont une durée de validité courte : chaque étude est datée."],
   ["Écart estimé", "Différence de budget annuel entre le contrat actuel et la proposition, sur la même base. C'est une estimation, pas une garantie."],
 ];

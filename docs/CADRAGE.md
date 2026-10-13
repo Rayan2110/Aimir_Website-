@@ -14,7 +14,7 @@ Le métier se résume en une chaîne :
 
 **Facture → Analyse → Consultation des fournisseurs → Comparaison → Choix du client → Nouveau contrat → Suivi → Renouvellement**
 
-Le modèle économique est **sans frais pour le client** : INENCO est rémunéré par une commission du fournisseur retenu, incluse dans le prix de l'offre. Le site le dit clairement, sans jamais afficher le montant ni les conditions (§9 du brief 1).
+Le modèle économique : **aucune facture INENCO pour le client**, INENCO est rémunéré par une commission du fournisseur retenu, incluse dans le prix de l'offre. Le site le dit clairement, sans jamais afficher le montant ni les conditions (§9 du brief 1).
 
 **Ce que le site doit accomplir** :
 
@@ -275,7 +275,7 @@ Exemple : « Votre restaurant consomme X MWh par an pour Y m² ; la médiane des
 1. Nom de domaine, adresses e-mail et téléphone définitifs.
 2. Hébergeur (UE recommandé) et serveur SMTP.
 3. Logo définitif. Le logo actuel est une proposition : onde qui se stabilise, puis point de décision.
-4. Validation de la direction artistique (ambre / encre / papier) et des engagements affichés, en particulier « une offre seulement si elle vous fait gagner ».
+4. Validation de la direction artistique (ambre / encre / papier) et des engagements affichés, en particulier « une proposition seulement si elle améliore votre situation » (formulée sans garantie d'économies).
 5. Relecture des pages légales par un avocat.
 6. Accord écrit des fondateurs pour les cartes de visite et les photos de l'équipe.
 7. Ordre de priorité de la phase 2.

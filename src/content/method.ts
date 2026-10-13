@@ -16,12 +16,12 @@ export const METHOD_STEPS = [
     n: "03",
     title: "Comparaison",
     text: "Les propositions retenues vous sont présentées de façon claire : prix, structure, durée, conditions.",
-    points: ["Lecture ligne à ligne vs votre contrat", "Budget annuel estimé sur votre consommation", "Risques de chaque structure expliqués", "Aucune proposition si rien ne vous fait gagner"],
+    points: ["Lecture ligne à ligne vs votre contrat", "Budget annuel estimé sur votre consommation", "Risques de chaque structure expliqués", "Pas de proposition si elle n'améliore pas votre situation"],
   },
   {
     n: "04",
     title: "Mise en place",
     text: "Vous choisissez. INENCO ENERGY accompagne la contractualisation, l'activation et le suivi jusqu'à l'échéance.",
-    points: ["Dossier de souscription préparé", "Aucune coupure, aucune intervention", "Suivi du contrat dans le temps", "Anticipation du renouvellement"],
+    points: ["Dossier de souscription préparé", "Pas de coupure liée au changement", "Suivi du contrat dans le temps", "Anticipation du renouvellement"],
   },
 ] as const;

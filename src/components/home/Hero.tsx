@@ -43,7 +43,7 @@ export function Hero() {
             </ButtonLink>
           </div>
           <p className="rise mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-3" style={{ ["--d" as string]: 950 }}>
-            Sans frais pour votre entreprise · Sans engagement
+            Rémunéré par le fournisseur retenu · Sans engagement
           </p>
         </div>
 

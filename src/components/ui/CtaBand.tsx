@@ -4,8 +4,8 @@ import { TerrainSvg } from "@/components/brand/TerrainSvg";
 
 /** Bandeau d'appel à l'action de fin de page. */
 export function CtaBand({
-  title = "Envoyez votre facture. *Nous vous disons ce que le marché peut vous proposer.*",
-  lead = "Sans frais facturés, sans engagement. Un analyste INENCO vous recontacte rapidement.",
+  title = "Envoyez votre facture. *Nous vous disons ce que les fournisseurs consultés peuvent vous proposer.*",
+  lead = "Sans engagement. INENCO est rémunéré par le fournisseur retenu, commission incluse dans son prix. Un analyste vous recontacte rapidement.",
 }: {
   title?: string;
   lead?: string;

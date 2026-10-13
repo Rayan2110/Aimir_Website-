@@ -8,6 +8,9 @@
 
 export const PLACEHOLDER = "[À compléter]";
 
+/** Version des conditions générales et de la politique de confidentialité (enregistrée avec chaque dossier). */
+export const LEGAL_VERSION = "2026-10-13";
+
 export const site = {
   name: "INENCO ENERGY",
   shortName: "INENCO",

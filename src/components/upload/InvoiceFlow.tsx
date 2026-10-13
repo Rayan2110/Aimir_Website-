@@ -307,7 +307,7 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
               )}
               <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[12px] text-fg-3">
                 <span className="flex items-center gap-2">
-                  <LockIcon /> Transmission chiffrée · accès restreint à l&apos;équipe INENCO
+                  <LockIcon /> Transmission chiffrée · accès réservé à l&apos;équipe chargée de votre dossier
                 </span>
                 <span className="w-full text-fg-3/80">Vous pouvez masquer votre IBAN avant l&apos;envoi : il ne nous est pas utile.</span>
                 <Link href="/contact" className="link-u text-fg-2">
@@ -485,6 +485,18 @@ export function InvoiceFlow({ variant = "full", className }: { variant?: "hero" 
                 />
                 <span>Je ne souhaite pas recevoir d&apos;informations commerciales de la part de {site.name}.</span>
               </label>
+
+              <p className="mt-4 text-[12px] leading-snug text-fg-3">
+                En envoyant mon dossier, je reconnais avoir pris connaissance des{" "}
+                <Link href="/conditions-generales" target="_blank" className="text-fg-2 underline underline-offset-2">
+                  conditions générales de service
+                </Link>{" "}
+                et de la{" "}
+                <Link href="/confidentialite" target="_blank" className="text-fg-2 underline underline-offset-2">
+                  politique de confidentialité
+                </Link>
+                .
+              </p>
 
               <div className="mt-6 flex items-center justify-between gap-3">
                 <button type="button" onClick={() => setStep("you")} className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg-3 hover:text-fg">

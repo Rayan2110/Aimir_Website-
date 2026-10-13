@@ -25,7 +25,7 @@ const content: EnergyContent = {
       code: "C4",
       name: "Basse tension > 36 kVA",
       who: "Hôtels, moyennes surfaces, PME, ateliers, sites logistiques.",
-      detail: "Puissances souscrites par poste horaire, risque de dépassements, acheminement plus important. La structure de prix et la durée deviennent des leviers majeurs.",
+      detail: "Puissances souscrites par poste horaire, risque de dépassements, acheminement plus important. La structure de prix et la durée deviennent des leviers majeurs. Une entreprise de moins de 10 personnes (chiffre d'affaires ou bilan ≤ 2 M€) peut être éligible au tarif réglementé quelle que soit sa puissance.",
     },
     {
       code: "C3 / C2",

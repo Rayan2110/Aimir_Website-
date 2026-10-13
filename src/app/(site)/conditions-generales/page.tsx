@@ -69,7 +69,7 @@ export default function ConditionsPage() {
         </p>
         <h3>B.6 Obligations de {l.companyName}</h3>
         <p>
-          {l.companyName} est tenu d&apos;une obligation de moyens. Il s&apos;engage à présenter des informations claires et loyales, à indiquer les fournisseurs consultés, à préciser les hypothèses de ses estimations, et à ne présenter une proposition que si elle améliore la situation du client en prix ou en conditions. Les écarts indiqués sont des estimations et non des garanties d&apos;économies.
+          {l.companyName} est tenu d&apos;une obligation de moyens. Il s&apos;engage à présenter des informations claires et loyales, à indiquer les fournisseurs consultés, à préciser les hypothèses de ses estimations, et à ne présenter une proposition que si, à la date de l&apos;étude et sur une base de comparaison identique, elle améliore la situation du client en prix ou en conditions. Cet engagement ne constitue pas une garantie d&apos;économies : l&apos;évolution des marchés (notamment pour les prix indexés) et de la consommation peut modifier le résultat. Les écarts indiqués sont des estimations.
         </p>
         <h3>B.7 Obligations du client</h3>
         <p>
@@ -81,7 +81,7 @@ export default function ConditionsPage() {
         </p>
         <h3>B.9 Droit de rétractation des petits professionnels</h3>
         <p>
-          Lorsque le contrat est conclu hors établissement, que son objet n&apos;entre pas dans le champ de l&apos;activité principale du client professionnel et que celui-ci emploie au plus cinq salariés, le client dispose d&apos;un délai de quatorze jours pour se rétracter, sans avoir à motiver sa décision (articles L.221-3 et L.221-18 du Code de la consommation). Le délai court à compter de la conclusion du contrat. Pour l&apos;exercer, le client adresse une déclaration dénuée d&apos;ambiguïté ou le formulaire ci-dessous à <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> ou par courrier au siège.
+          Lorsque le contrat est conclu hors établissement, que son objet n&apos;entre pas dans le champ de l&apos;activité principale du client professionnel et que celui-ci emploie au plus cinq salariés, le client dispose d&apos;un délai de quatorze jours pour se rétracter, sans avoir à motiver sa décision (articles L.221-3 et L.221-18 du Code de la consommation). Le délai court à compter de la conclusion du contrat. En cas de contrat conclu hors établissement, ces informations et le formulaire ci-dessous sont remis au client sur papier ou sur un autre support durable lors de la signature. Pour l&apos;exercer, le client adresse une déclaration dénuée d&apos;ambiguïté ou le formulaire ci-dessous à <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> ou par courrier au siège.
         </p>
         <div className="mt-4 rounded-[4px] border border-[var(--line-strong)] p-6 text-[14px] text-fg-2">
           <p className="!mt-0 font-mono text-[11px] uppercase tracking-[0.14em] text-fg-3">Modèle de formulaire de rétractation</p>
@@ -102,11 +102,11 @@ export default function ConditionsPage() {
         </p>
         <h3>B.11 Durée et fin du mandat</h3>
         <p>
-          Le mandat prend effet à la demande d&apos;étude et se poursuit pendant la durée du suivi du contrat de fourniture. Le client peut y mettre fin à tout moment, par écrit, sans frais.
+          Le mandat prend effet à la demande d&apos;étude et se poursuit pendant la durée du suivi du contrat de fourniture. Le client peut y mettre fin à tout moment, par écrit, sans frais. La fin du mandat n&apos;a pas d&apos;effet sur le contrat de fourniture en cours, dont le prix inclut la commission jusqu&apos;à son terme.
         </p>
         <h3>B.12 Réclamations et médiation</h3>
         <p>
-          Toute réclamation relative à notre service peut être adressée à <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. Pour un litige avec un fournisseur d&apos;énergie, les microentreprises (moins de 10 personnes et chiffre d&apos;affaires ou bilan n&apos;excédant pas 2 M€) et les non-professionnels peuvent, après réclamation écrite auprès du fournisseur, saisir gratuitement le{" "}
+          Toute réclamation relative à notre service peut être adressée à <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. Pour un litige avec un fournisseur d&apos;énergie, les microentreprises (moins de 10 personnes et chiffre d&apos;affaires, recettes ou total de bilan annuels n&apos;excédant pas 2 M€) et les non-professionnels peuvent, après réclamation écrite auprès du fournisseur, saisir gratuitement le{" "}
           <a href="https://www.energie-mediateur.fr" target="_blank" rel="noopener noreferrer">
             Médiateur national de l&apos;énergie
           </a>

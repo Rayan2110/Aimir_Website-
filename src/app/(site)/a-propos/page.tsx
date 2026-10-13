@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 const PRINCIPLES = [
   ["Lisibilité", "Une étude doit se comprendre en une minute. Nous écrivons pour des dirigeants, pas pour des spécialistes de l'énergie."],
-  ["Honnêteté", "Pas de promesse d'économies garanties. Si votre contrat est déjà bien placé, nous vous le disons."],
+  ["Honnêteté", "Aucune garantie d'économies promise. Si votre contrat est déjà bien placé, nous vous le disons."],
   ["Proximité", "Un interlocuteur unique, joignable, qui connaît votre activité et vos sites."],
   ["Durée", "Nous ne disparaissons pas après la signature : le suivi et le renouvellement font partie du service."],
 ];
@@ -80,7 +80,7 @@ export default function AProposPage() {
           </div>
           <div className="text-[17px] leading-relaxed text-ink-text-2 lg:col-span-6 lg:col-start-7">
             <p>
-              {site.name} est un intermédiaire : nous ne sommes ni fournisseur d&apos;énergie, ni gestionnaire de réseau, et nous ne sommes affiliés à aucun organisme public. Aucun frais n&apos;est facturé à nos clients. Nous sommes rémunérés par le fournisseur retenu, via une commission incluse dans le prix de son offre.
+              {site.name} est un intermédiaire : nous ne sommes ni fournisseur d&apos;énergie, ni gestionnaire de réseau, et nous ne sommes affiliés à aucun organisme public. Nous n&apos;adressons aucune facture à nos clients : nous sommes rémunérés par le fournisseur retenu, via une commission incluse dans le prix de son offre.
             </p>
             <p className="mt-4">
               Nous consultons un panel de fournisseurs partenaires et indiquons dans chaque étude ceux qui ont été consultés.{" "}

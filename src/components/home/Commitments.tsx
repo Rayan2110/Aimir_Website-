@@ -3,15 +3,15 @@ import { Container, SectionHead } from "@/components/ui/Section";
 
 const ITEMS = [
   {
-    k: "0 €",
-    title: "Aucun frais facturé",
-    text: "Vous ne payez rien à INENCO. Notre rémunération est une commission versée par le fournisseur retenu, incluse dans le prix de son offre.",
+    k: "%",
+    title: "Une rémunération transparente",
+    text: "INENCO ne vous adresse aucune facture : nous sommes rémunérés par une commission versée par le fournisseur retenu et incluse dans le prix que vous payez. Les offres sont comparées commission comprise.",
     link: { href: "/remuneration", label: "Comment sommes-nous rémunérés ?" },
   },
   {
     k: "+",
-    title: "Une offre seulement si elle vous fait gagner",
-    text: "Nous ne vous présentons une proposition que si elle améliore votre situation actuelle, en prix ou en conditions. Sinon, nous vous le disons.",
+    title: "Une proposition seulement si elle améliore votre situation",
+    text: "À la date de l'étude et sur une base identique, en prix ou en conditions. Sinon, nous vous le disons. Ce n'est pas une garantie d'économies : le marché et votre consommation peuvent évoluer.",
   },
   {
     k: "1",
@@ -19,9 +19,9 @@ const ITEMS = [
     text: "Une personne suit votre dossier de l'analyse au renouvellement. Elle connaît vos sites, vos contraintes et vos échéances.",
   },
   {
-    k: "0",
-    title: "Aucune démarche de votre côté",
-    text: "Nous préparons la souscription et suivons le changement de fournisseur. Aucune coupure, aucune intervention sur le compteur.",
+    k: "→",
+    title: "Des démarches simplifiées",
+    text: "Nous préparons la souscription et suivons le changement de fournisseur : vous vérifiez et vous signez. Le changement de fournisseur, à lui seul, n'entraîne pas de coupure.",
   },
 ];
 
@@ -29,7 +29,7 @@ export function Commitments() {
   return (
     <section className="relative border-t border-[var(--line)] py-28 md:py-36">
       <Container>
-        <SectionHead index="09" label="Nos engagements" title="Un conseil, *pas une vente.*" align="split" lead="Le courtage en énergie n'a pas toujours bonne presse. Nous avons choisi des règles simples, et nous les tenons." />
+        <SectionHead index="09" label="Nos engagements" title="Un accompagnement *transparent.*" align="split" lead="Le courtage en énergie n'a pas toujours bonne presse. Nous avons choisi des règles simples, et nous les tenons." />
         <ul className="mt-16 grid border-t border-[var(--line)] md:grid-cols-2 xl:grid-cols-4">
           {ITEMS.map((it, i) => (
             <li

@@ -4,20 +4,20 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { cn } from "@/lib/cn";
 
-type Part = { id: string; label: string; share: number; tag: "Mis en concurrence" | "Réglementé"; text: string; tone: number };
+type Part = { id: string; label: string; share: number; tag: "Mis en concurrence" | "En partie réglementé" | "Réglementé"; text: string; tone: number };
 
 /** Répartition indicative d'une facture (part TTC). Illustration pédagogique. */
 const DATA: Record<"electricite" | "gaz", Part[]> = {
   electricite: [
     { id: "energie", label: "Prix de l'énergie", share: 42, tag: "Mis en concurrence", tone: 1, text: "Prix du kWh fixé par le fournisseur, unique ou par poste horaire (heures pleines / heures creuses). Il intègre en général les coûts de capacité et des certificats d'économies d'énergie. C'est la part que la consultation permet de faire évoluer." },
-    { id: "abonnement", label: "Abonnement", share: 6, tag: "Mis en concurrence", tone: 0.75, text: "Part fixe mensuelle, liée à la puissance souscrite (kVA). Une puissance surdimensionnée se paie toute l'année." },
+    { id: "abonnement", label: "Abonnement", share: 6, tag: "En partie réglementé", tone: 0.75, text: "Part fixe mensuelle, liée à la puissance souscrite (kVA). Elle comprend une part fixée par le fournisseur et une part d'acheminement réglementée. Une puissance surdimensionnée se paie toute l'année." },
     { id: "acheminement", label: "Acheminement (TURPE)", share: 24, tag: "Réglementé", tone: 0.4, text: "Utilisation du réseau public, fixée par la Commission de régulation de l'énergie. Le montant est identique quel que soit le fournisseur. Il dépend de votre segment (C5, C4…) et de votre puissance." },
     { id: "taxes", label: "Taxes et contributions", share: 11.3, tag: "Réglementé", tone: 0.28, text: "Accise sur l'électricité et contribution tarifaire d'acheminement (CTA). Fixées par la loi, elles ne dépendent pas du fournisseur." },
     { id: "tva", label: "TVA", share: 16.7, tag: "Réglementé", tone: 0.16, text: "20 % sur l'ensemble. Une entreprise assujettie la récupère en général : nos comparaisons se font donc hors TVA." },
   ],
   gaz: [
     { id: "energie", label: "Prix de la molécule", share: 46, tag: "Mis en concurrence", tone: 1, text: "Prix du MWh de gaz, fixe ou indexé sur un marché de référence. C'est la part que la consultation permet de faire évoluer." },
-    { id: "abonnement", label: "Abonnement", share: 4, tag: "Mis en concurrence", tone: 0.75, text: "Part fixe facturée par le fournisseur, selon votre profil de consommation." },
+    { id: "abonnement", label: "Abonnement", share: 4, tag: "En partie réglementé", tone: 0.75, text: "Part fixe facturée selon votre profil de consommation : une part fixée par le fournisseur, une part liée à l'acheminement réglementé." },
     { id: "acheminement", label: "Acheminement et stockage", share: 21, tag: "Réglementé", tone: 0.4, text: "Distribution (ATRD), transport et stockage : tarifs régulés, identiques quel que soit le fournisseur." },
     { id: "taxes", label: "Taxes et contributions", share: 12.3, tag: "Réglementé", tone: 0.28, text: "Accise sur le gaz naturel et contribution tarifaire d'acheminement (CTA). Fixées par la loi." },
     { id: "tva", label: "TVA", share: 16.7, tag: "Réglementé", tone: 0.16, text: "20 % sur l'ensemble, en général récupérable par l'entreprise. Nos comparaisons se font hors TVA." },
@@ -70,7 +70,7 @@ export function OfferAnatomy({ tone = "dark" }: { tone?: "dark" | "paper" }) {
             className="group relative h-full origin-left animate-[grow_1.1s_var(--ease-out-expo)_both] overflow-hidden rounded-[2px] text-left transition-[filter] duration-300"
             style={{
               width: `${p.share}%`,
-              background: p.tag === "Mis en concurrence" ? `rgb(240 163 59 / ${p.tone})` : `rgb(${ink} / ${p.tone})`,
+              background: p.tag === "Réglementé" ? `rgb(${ink} / ${p.tone})` : `rgb(240 163 59 / ${p.tone})`,
               filter: active === p.id ? "none" : "saturate(0.6) brightness(0.85)",
             }}
           >
@@ -89,6 +89,9 @@ export function OfferAnatomy({ tone = "dark" }: { tone?: "dark" | "paper" }) {
       <div className="mt-6 flex flex-wrap gap-5 text-[12px] opacity-75">
         <span className="flex items-center gap-2">
           <span className="size-2.5 rounded-[2px] bg-volt" /> Mis en concurrence par la consultation
+        </span>
+        <span className="flex items-center gap-2">
+          <span className="size-2.5 rounded-[2px] bg-volt/60" /> En partie réglementé
         </span>
         <span className="flex items-center gap-2">
           <span className="size-2.5 rounded-[2px]" style={{ background: `rgb(${ink} / 0.4)` }} /> Réglementé : identique chez tous les fournisseurs
@@ -112,7 +115,7 @@ export function OfferAnatomy({ tone = "dark" }: { tone?: "dark" | "paper" }) {
         </motion.div>
       </AnimatePresence>
       <p className="mt-6 text-[11.5px] opacity-55">
-        Illustration pédagogique : la répartition réelle varie fortement selon le segment, la puissance, la consommation et la période.
+        Ordre de grandeur illustratif pour un petit site professionnel, non calculé sur un contrat réel et non contractuel : la répartition réelle varie fortement selon le segment, la puissance, la consommation, l&apos;offre et la période.
       </p>
     </div>
   );

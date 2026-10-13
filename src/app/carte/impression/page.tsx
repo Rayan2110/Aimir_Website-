@@ -10,20 +10,19 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/** Trait de coupe : repères placés dans le fond perdu. */
+/** Traits de coupe placés au format fini (1,5 mm à l'intérieur du fond perdu). */
 function CropMarks() {
   const c = "absolute bg-black/70";
   return (
     <span aria-hidden className="pointer-events-none absolute inset-0">
-      {/* coins : traits horizontaux et verticaux à 3 mm (fond perdu) */}
-      <span className={`${c} left-[-6mm] top-[3mm] h-px w-[5mm]`} />
-      <span className={`${c} right-[-6mm] top-[3mm] h-px w-[5mm]`} />
-      <span className={`${c} bottom-[3mm] left-[-6mm] h-px w-[5mm]`} />
-      <span className={`${c} bottom-[3mm] right-[-6mm] h-px w-[5mm]`} />
-      <span className={`${c} left-[3mm] top-[-6mm] h-[5mm] w-px`} />
-      <span className={`${c} right-[3mm] top-[-6mm] h-[5mm] w-px`} />
-      <span className={`${c} bottom-[-6mm] left-[3mm] h-[5mm] w-px`} />
-      <span className={`${c} bottom-[-6mm] right-[3mm] h-[5mm] w-px`} />
+      <span className={`${c} left-[-6mm] top-[1.5mm] h-px w-[5mm]`} />
+      <span className={`${c} right-[-6mm] top-[1.5mm] h-px w-[5mm]`} />
+      <span className={`${c} bottom-[1.5mm] left-[-6mm] h-px w-[5mm]`} />
+      <span className={`${c} bottom-[1.5mm] right-[-6mm] h-px w-[5mm]`} />
+      <span className={`${c} left-[1.5mm] top-[-6mm] h-[5mm] w-px`} />
+      <span className={`${c} right-[1.5mm] top-[-6mm] h-[5mm] w-px`} />
+      <span className={`${c} bottom-[-6mm] left-[1.5mm] h-[5mm] w-px`} />
+      <span className={`${c} bottom-[-6mm] right-[1.5mm] h-[5mm] w-px`} />
     </span>
   );
 }
@@ -36,8 +35,8 @@ export default async function ImpressionPage() {
       <div className="no-print mx-auto mb-8 max-w-[210mm] px-4">
         <h1 className="text-[26px] tracking-tight">Cartes de visite — planche d&apos;impression</h1>
         <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-ink-text-2">
-          Format 85 × 55 mm, fond perdu de 3 mm inclus (91 × 61 mm), traits de coupe. Imprimez à 100 % (sans mise à l&apos;échelle) ou enregistrez en PDF vectoriel pour l&apos;imprimeur. Le QR code du verso ouvre la carte numérique{" "}
-          <code className="rounded bg-black/10 px-1">{site.url.replace(/^https?:\/\//, "")}/carte/…</code>. Idéal aussi pour une carte NFC programmée avec la même adresse.
+          Format fini 85 × 55 mm, gabarit VistaPrint 88 × 58 mm (1,5 mm de fond perdu), zone de sécurité respectée, traits de coupe pour une impression maison. Pour VistaPrint, téléversez plutôt les fichiers recto / verso individuels (sans traits de coupe) générés par <code className="rounded bg-black/10 px-1">npm run cartes:pdf</code>. Le QR code du verso ouvre la carte numérique{" "}
+          <code className="rounded bg-black/10 px-1">{site.url.replace(/^https?:\/\//, "")}/carte/…</code> : idéal aussi pour une carte NFC programmée avec la même adresse.
         </p>
         <div className="mt-4">
           <PrintButton />
@@ -52,7 +51,7 @@ export default async function ImpressionPage() {
             </p>
             <div className="flex flex-wrap gap-[14mm]">
               {[<CardRecto key="r" className="h-full w-full" seed={1.7 + i * 0.9} />, <CardVerso key="v" member={m} qr={qrs[i]} className="h-full w-full" />].map((face, k) => (
-                <div key={k} className="relative h-[61mm] w-[91mm]">
+                <div key={k} className="relative h-[58mm] w-[88mm]" style={{ ["--bleed" as string]: "1.5mm" }}>
                   {face}
                   <CropMarks />
                 </div>
