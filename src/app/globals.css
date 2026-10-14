@@ -226,8 +226,7 @@ html.lenis body {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translate3d(0, 32px, 0);
-    filter: blur(10px);
+    transform: translate3d(0, 28px, 0);
   }
 }
 .rise-mask {
@@ -484,23 +483,30 @@ html.lenis body {
   pointer-events: none;
 }
 ::view-transition-old(.page) {
-  animation: 260ms var(--ease-in-out-quart) both page-out;
+  animation: 220ms var(--ease-in-out-quart) both page-out;
 }
 ::view-transition-new(.page) {
-  animation: 700ms var(--ease-out-expo) 120ms both page-in;
+  animation: 520ms var(--ease-out-expo) 80ms both page-in;
 }
 @keyframes page-out {
   to {
     opacity: 0;
-    filter: blur(6px);
-    transform: translateY(-12px);
+    transform: translateY(-10px);
   }
 }
 @keyframes page-in {
   from {
     opacity: 0;
-    filter: blur(8px);
-    transform: translateY(24px);
+    transform: translateY(18px);
+  }
+}
+/* Téléphones et tablettes : changement de page immédiat (les captures plein écran
+   des transitions sont coûteuses sur Safari iOS et laissaient un écran vide). */
+@media (max-width: 1023px), (pointer: coarse) {
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation: none !important;
   }
 }
 ::view-transition-group(site-header) {

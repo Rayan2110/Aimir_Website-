@@ -45,7 +45,7 @@ export function MobileCta() {
     >
       <Link
         href="/envoyer-une-facture"
-        className="flex h-14 items-center justify-between rounded-[6px] border border-volt/50 bg-ink-950/90 px-5 shadow-[0_20px_60px_-10px_rgb(0_0_0/0.8)] backdrop-blur-xl"
+        className="flex h-14 items-center justify-between rounded-[6px] border border-volt/50 bg-ink-900 px-5 shadow-[0_20px_60px_-10px_rgb(0_0_0/0.8)]"
       >
         <span className="flex items-center gap-3">
           <span className="relative flex size-2">

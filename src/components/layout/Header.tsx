@@ -111,6 +111,7 @@ export function Header() {
   const isActive = (href: string) => pathname === href || (href !== "/" && pathname.startsWith(href));
 
   return (
+    <>
     <header
       onFocusCapture={() => setHidden(false)}
       style={{ viewTransitionName: "site-header" }}
@@ -244,11 +245,13 @@ export function Header() {
         </div>
       </div>
 
-      {/* Menu mobile plein écran */}
+    </header>
+      {/* Menu mobile plein écran — hors du <header> : un élément fixe dans un parent transformé
+          (translate, backdrop-filter) serait confiné à la hauteur de l'en-tête, notamment sur iOS. */}
       <div
         id="menu-mobile"
         className={cn(
-          "fixed inset-x-0 bottom-0 top-[var(--header-h)] overflow-y-auto bg-ink-950 px-[var(--gutter)] pb-10 pt-6 transition-[clip-path] duration-700 ease-[var(--ease-in-out-quart)] lg:hidden",
+          "fixed inset-x-0 bottom-0 top-[var(--header-h)] z-[45] overflow-y-auto bg-ink-950 px-[var(--gutter)] pb-10 pt-6 transition-[clip-path] duration-700 ease-[var(--ease-in-out-quart)] lg:hidden",
           mobile ? "[clip-path:inset(0_0_0_0)]" : "pointer-events-none [clip-path:inset(0_0_100%_0)]",
         )}
         data-lenis-prevent
@@ -294,7 +297,7 @@ export function Header() {
           </ButtonLink>
         </div>
       </div>
-    </header>
+    </>
   );
 }
 

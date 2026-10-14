@@ -107,7 +107,7 @@ export function EnergyField({ className, calmOnScroll = true, intensity = 1 }: {
         ctx.fillStyle = BG;
         ctx.fill();
 
-        const a = (0.07 + 0.6 * Math.pow(z, 1.6)) * (0.55 + 0.45 * calm);
+        const a = Math.min(1, (0.07 + 0.6 * Math.pow(z, 1.6)) * (0.55 + 0.45 * calm) * (w < 700 ? 1.7 : 1));
         const g = ctx.createLinearGradient(w / 2 - half, 0, w / 2 + half, 0);
         const center = 0.5 + (pointer.amp > 0.01 ? px * 0.5 * pointer.amp : 0);
         g.addColorStop(0, `rgba(236,234,228,0)`);

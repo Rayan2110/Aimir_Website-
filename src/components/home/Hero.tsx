@@ -17,7 +17,7 @@ export function Hero() {
     <section className="relative isolate flex min-h-[100svh] flex-col overflow-hidden pt-[var(--header-h)] lg:pt-[calc(var(--header-h)+32px)]">
       <EnergyField className="-z-20" />
       {/* voiles de lisibilité */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_60%_at_20%_40%,rgb(6_8_11/0.92),transparent_70%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_60%_at_20%_40%,rgb(6_8_11/0.92),transparent_70%)] max-lg:opacity-60" />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-48 bg-gradient-to-b from-ink-950 to-transparent" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-t from-ink-950 to-transparent" />
 
