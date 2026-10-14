@@ -35,6 +35,9 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  // Dossier de compilation : `.next` par défaut ; le générateur de cartes de visite
+  // compile dans un dossier séparé pour ne pas perturber un site déjà lancé.
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
   // Développement : autorise l'aperçu depuis un téléphone sur le même réseau local.
   allowedDevOrigins: ["192.168.*.*", "*.local"],
   turbopack: {

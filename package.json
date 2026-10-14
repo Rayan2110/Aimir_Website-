@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "cartes:pdf": "node scripts/export-cards.mjs",
-    "demo": "next build && DOSSIER_LOCAL=true next start"
+    "demo": "next build && DOSSIER_LOCAL=true next start",
+    "cartes": "bash Cartes-de-visite.command"
   },
   "dependencies": {
     "gsap": "^3.15.0",

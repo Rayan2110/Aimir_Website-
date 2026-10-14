@@ -29,16 +29,19 @@ Source : [VistaPrint — Format cartes de visite](https://www.vistaprint.fr/hub/
 ## Générer les fichiers
 
 1. Compléter `src/content/team.ts` : nom, fonction, téléphone, e-mail.
-2. Vérifier `NEXT_PUBLIC_SITE_URL` : le QR code pointe vers `<domaine>/carte/<nom>`. **Le domaine doit être en ligne avant l'impression.**
-3. Lancer le site (`npm run dev`), puis :
+2. Vérifier l'adresse du site : le QR code pointe vers `<adresse du site>/carte/<nom>`. Aujourd'hui, c'est l'aperçu en ligne `aimir-website.vercel.app` ; avec un domaine définitif, renseigner `NEXT_PUBLIC_SITE_URL`.
+3. **Double-cliquer sur `Cartes-de-visite.command`**, à la racine du projet.
 
-   ```bash
-   npm run cartes:pdf
-   ```
+Le lanceur prépare les cartes (environ 30 secondes), crée les fichiers, puis ouvre le dossier `print/cartes-de-visite/` dans le Finder. Il fonctionne même si le site est déjà lancé.
 
-4. Les fichiers sont créés dans `print/cartes-de-visite/` (dossier ignoré par git) :
-   - `<nom>-recto.pdf`, `<nom>-verso.pdf` : PDF vectoriels, polices incorporées, format recommandé ;
-   - `<nom>-recto.png`, `<nom>-verso.png` : PNG en 300 DPI, en secours.
+| Fichier | Usage |
+|---|---|
+| `<nom>-recto.pdf`, `<nom>-verso.pdf` | PDF vectoriels, polices incorporées : **à téléverser chez VistaPrint** |
+| `<nom>-recto.png`, `<nom>-verso.png` | PNG en 300 DPI, en secours ou pour un aperçu |
+
+Équivalent dans le Terminal : `npm run cartes`.
+
+Prérequis : Node.js et Google Chrome installés.
 
 ## Commander chez VistaPrint
 

@@ -33,7 +33,7 @@ npm run demo
 | 7 | **/etudes-de-cas** | L'étude comparative type, telle que la recevra un client. |
 | 8 | **/methode** → « Comprendre votre offre » | Ce qui se négocie et ce qui est réglementé. |
 | 9 | **/carte/aimir** | Carte de visite numérique : cliquer pour la retourner, « Enregistrer le contact ». |
-| 10 | **/carte/impression** | La planche des cartes au format VistaPrint (88 × 58 mm). |
+| 10 | **/carte/impression** | La planche des cartes au format VistaPrint (88 × 58 mm). Double-cliquer sur **`Cartes-de-visite.command`** pour générer les PDF à envoyer à VistaPrint. |
 | 11 | Pages légales (pied de page) | Mentions, confidentialité, conditions générales, rémunération. |
 
 **Astuce** : sur l'accueil, faire défiler lentement. Les animations sont pilotées par le défilement.

@@ -45,3 +45,4 @@ next-env.d.ts
 
 # Outils locaux de l’éditeur
 /.claude/
+/.next-cartes/
