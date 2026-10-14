@@ -81,6 +81,9 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    // Menu ouvert : le reste de la page devient inerte (focus piégé dans le menu).
+    document.getElementById("contenu")?.toggleAttribute("inert", mobile);
+    document.querySelector("body > footer, main + footer")?.toggleAttribute("inert", mobile);
     document.documentElement.style.overflow = mobile ? "hidden" : "";
     if (mobile) window.__lenis?.stop();
     else window.__lenis?.start();
@@ -109,6 +112,7 @@ export function Header() {
 
   return (
     <header
+      onFocusCapture={() => setHidden(false)}
       style={{ viewTransitionName: "site-header" }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-700 ease-[var(--ease-out-expo)]",
@@ -274,7 +278,7 @@ export function Header() {
                 transform: mobile ? "none" : "translateY(16px)",
               }}
             >
-              <Link href={l.href} className="flex items-baseline justify-between py-4 text-[26px] tracking-tight">
+              <Link href={l.href} onClick={() => setMobile(false)} className="flex items-baseline justify-between py-4 text-[26px] tracking-tight">
                 {l.label}
                 <span className="font-mono text-[11px] text-fg-3">{String(i + 1).padStart(2, "0")}</span>
               </Link>

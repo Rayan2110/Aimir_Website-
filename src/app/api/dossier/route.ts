@@ -22,8 +22,11 @@ export async function POST(request: NextRequest) {
     return fail(429, "Trop d'envois en peu de temps. Merci de réessayer dans quelques minutes.");
   }
 
-  const length = Number(request.headers.get("content-length") ?? 0);
-  if (length > 22 * 1024 * 1024) return fail(413, "Envoi trop volumineux (20 Mo maximum).");
+  // La taille doit être annoncée (les navigateurs le font toujours) : un envoi « chunked »
+  // contournerait sinon la limite et serait entièrement chargé en mémoire.
+  const declared = request.headers.get("content-length");
+  if (!declared) return fail(411, "Taille de l'envoi non indiquée.");
+  if (Number(declared) > 22 * 1024 * 1024) return fail(413, "Envoi trop volumineux (20 Mo maximum).");
 
   let form: FormData;
   try {
@@ -64,7 +67,7 @@ export async function POST(request: NextRequest) {
         ["Énergie", ENERGIES[d.energy]],
         ["Nombre de sites", String(d.sites)],
         ["Échéance du contrat", d.contractEnd],
-        ["Fichiers", read.files.map((f) => `${f.name} (${Math.round(f.size / 1024)} Ko)`).join(", ")],
+        ["Fichiers", read.files.map((f) => `${f.name} ← « ${f.original} » (${Math.round(f.size / 1024)} Ko)`).join(", ")],
         ["Autorisation étude / transmission fournisseurs", "Oui (case cochée en ligne)"],
         ["Opposition à la prospection", d.noMarketing ? "OUI — ne pas prospecter" : "Non"],
         ["Textes acceptés", `Conditions générales et politique de confidentialité, version ${LEGAL_VERSION}`],

@@ -170,10 +170,18 @@ export function EnergyField({ className, calmOnScroll = true, intensity = 1 }: {
     });
     ro.observe(host);
 
-    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), { threshold: 0 });
+    let inView = false;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        inView = e.isIntersecting;
+        if (inView && !document.hidden) start();
+        else stop();
+      },
+      { threshold: 0 },
+    );
     io.observe(host);
 
-    const onVis = () => (document.hidden ? stop() : start());
+    const onVis = () => (document.hidden || !inView ? stop() : start());
     document.addEventListener("visibilitychange", onVis);
 
     const onMove = (e: PointerEvent) => {

@@ -2,19 +2,21 @@
  * Réception des dossiers (factures + contact) — côté serveur uniquement.
  *
  * Aucune API payante : l'acheminement se fait par e-mail via le serveur SMTP de
- * l'entreprise (variables d'environnement). En développement, sans SMTP, les
- * dossiers sont écrits localement dans `.data/dossiers/` (ignoré par git).
- * En production sans SMTP configuré, la réception est refusée explicitement
- * plutôt que de perdre silencieusement une facture.
+ * l'entreprise (variables d'environnement). En développement — ou en démonstration
+ * locale avec DOSSIER_LOCAL=true — sans SMTP, les dossiers sont écrits dans
+ * `.data/dossiers/` (ignoré par git). En production sans SMTP configuré, la
+ * réception est refusée explicitement plutôt que de perdre une facture.
  */
 
+import "server-only";
 import { randomBytes } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import nodemailer from "nodemailer";
 import { ACCEPTED_MIME, MAX_FILE_SIZE, MAX_FILES, MAX_TOTAL_SIZE } from "./schema";
 
-export type StoredFile = { name: string; type: string; size: number; data: Buffer };
+/** `name` : nom sûr dérivé du type détecté ; `original` : nom fourni par l'utilisateur (affichage). */
+export type StoredFile = { name: string; original: string; type: string; size: number; data: Buffer };
 
 /* ── Fichiers ──────────────────────────────────────────────────── */
 
@@ -32,7 +34,17 @@ export function sniffType(buf: Buffer): (typeof ACCEPTED_MIME)[number] | null {
   return null;
 }
 
-function safeName(name: string) {
+const EXT: Record<(typeof ACCEPTED_MIME)[number], string> = {
+  "application/pdf": "pdf",
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/webp": "webp",
+  "image/heic": "heic",
+  "image/heif": "heif",
+};
+
+/** Nom d'origine assaini — conservé pour information uniquement (jamais comme nom de fichier). */
+function safeLabel(name: string) {
   const base = name.normalize("NFKD").replace(/[^\w.\- ]+/g, "").trim().slice(0, 80);
   return base || "document";
 }
@@ -50,7 +62,8 @@ export async function readFiles(entries: FormDataEntryValue[], { required }: { r
     const data = Buffer.from(await f.arrayBuffer());
     const type = sniffType(data);
     if (!type) return { error: "Format non reconnu. Envoyez un PDF ou une photo." } as const;
-    out.push({ name: safeName(f.name), type, size: f.size, data });
+    // L'extension provient du type réellement détecté, jamais du nom fourni (.html, .bat…).
+    out.push({ name: `facture-${out.length + 1}.${EXT[type]}`, original: safeLabel(f.name), type, size: f.size, data });
   }
   return { files: out } as const;
 }
@@ -65,20 +78,29 @@ const hits = new Map<string, number[]>();
 export function rateLimited(ip: string, now: number) {
   const list = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
   list.push(now);
-  hits.set(ip, list);
-  if (hits.size > 5000) hits.clear();
+  hits.delete(ip);
+  hits.set(ip, list); // réinsertion : l'ordre de la Map suit la dernière activité
+  while (hits.size > 5000) hits.delete(hits.keys().next().value!);
   return list.length > MAX_HITS;
 }
 
+/**
+ * Adresse IP du client. On privilégie `x-real-ip`, posé par l'hébergeur ou le
+ * proxy, puis la DERNIÈRE valeur de `x-forwarded-for` (ajoutée par le dernier
+ * saut de confiance) : la première valeur est contrôlée par le client.
+ */
 export function clientIp(headers: Headers) {
-  return headers.get("x-forwarded-for")?.split(",")[0]?.trim() || headers.get("x-real-ip") || "unknown";
+  const real = headers.get("x-real-ip")?.trim();
+  if (real) return real;
+  const chain = headers.get("x-forwarded-for")?.split(",").map((s) => s.trim()).filter(Boolean);
+  return chain?.at(-1) ?? "local";
 }
 
 /** Refuse les envois provenant d'une autre origine (protection CSRF basique). */
 export function sameOrigin(headers: Headers) {
   const origin = headers.get("origin");
   if (!origin) return true;
-  const host = headers.get("x-forwarded-host") ?? headers.get("host");
+  const host = headers.get("host");
   try {
     return new URL(origin).host === host;
   } catch {
@@ -137,6 +159,7 @@ export async function deliver({
         text: fields.map(([k, v]) => `${k} : ${v || "—"}`).join("\n"),
         html: `<p style="font-family:sans-serif">Dossier <strong>${esc(reference)}</strong></p><table style="font-family:sans-serif;font-size:14px">${rows}</table>`,
         attachments: files.map((f) => ({ filename: f.name, content: f.data, contentType: f.type })),
+        // nom d'origine indiqué dans le corps du message uniquement
       });
       return { ok: true };
     } catch (err) {
@@ -145,7 +168,7 @@ export async function deliver({
     }
   }
 
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.NODE_ENV !== "production" || process.env.DOSSIER_LOCAL === "true") {
     const dir = path.join(process.cwd(), ".data", "dossiers", reference);
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "dossier.json"), JSON.stringify(Object.fromEntries(fields), null, 2));

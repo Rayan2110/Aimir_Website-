@@ -19,7 +19,8 @@ export const site = {
     "INENCO analyse vos contrats d'électricité et de gaz, consulte les fournisseurs et vous accompagne dans chaque étape de votre décision.",
   description:
     "INENCO ENERGY, cabinet de courtage et d'optimisation énergétique pour les professionnels : analyse de factures d'électricité et de gaz, consultation des fournisseurs, comparaison et suivi de vos contrats.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://www.inenco-energy.fr"), // TODO domaine définitif
+  // Adresse publique (liens canoniques, QR codes des cartes). Par défaut : l'aperçu Vercel en ligne.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "https://aimir-website.vercel.app"), // TODO domaine définitif
   /** Indexation par les moteurs de recherche : désactivée tant que le site n'est pas validé (SITE_INDEXABLE=true pour l'ouvrir). */
   indexable: process.env.SITE_INDEXABLE === "true",
   zone: "France métropolitaine",

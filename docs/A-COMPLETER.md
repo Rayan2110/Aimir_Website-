@@ -6,7 +6,7 @@ Tant qu'une valeur vaut `[À compléter]`, elle est **surlignée** sur les pages
 
 | Champ | Utilisé sur | Statut |
 |---|---|---|
-| `url` (domaine définitif) | canonique, sitemap, QR codes | provisoire : `www.inenco-energy.fr` |
+| `url` (domaine définitif) | canonique, sitemap, QR codes | provisoire : `aimir-website.vercel.app` (aperçu) |
 | `contact.email` | partout | provisoire |
 | `contact.phone` / `phoneHref` | partout | provisoire |
 | `contact.address` | contact | à compléter |

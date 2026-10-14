@@ -35,9 +35,10 @@ export function MethodScroll() {
   }, []);
 
   return (
-    <div ref={root} className="relative lg:h-[100svh]">
+    <div ref={root} className="relative lg:h-[100svh] lg:motion-reduce:h-auto">
       {/* Desktop : section épinglée */}
-      <div className="mx-auto hidden h-full max-w-[1440px] grid-cols-12 items-center gap-8 px-[var(--gutter)] pt-[calc(var(--header-h)+32px)] lg:grid">
+      {/* Version visuelle épinglée : décorative pour les lecteurs d'écran, qui lisent la liste ci-dessous. */}
+      <div aria-hidden className="mx-auto hidden h-full max-w-[1440px] grid-cols-12 items-center gap-8 px-[var(--gutter)] pt-[calc(var(--header-h)+32px)] lg:grid lg:motion-reduce:hidden">
         <div className="col-span-5">
           <p className="eyebrow mb-8 flex items-center gap-3">
             <span className="text-volt">Méthode</span>
@@ -48,7 +49,6 @@ export function MethodScroll() {
             {METHOD_STEPS.map((s, i) => (
               <div
                 key={s.n}
-                aria-hidden={i !== active}
                 className={cn(
                   "absolute inset-0 transition-all duration-700 ease-[var(--ease-out-expo)]",
                   i === active ? "translate-y-0 opacity-100" : i < active ? "-translate-y-8 opacity-0" : "translate-y-8 opacity-0",
@@ -116,7 +116,8 @@ export function MethodScroll() {
       </div>
 
       {/* Mobile / tablette / mouvement réduit : liste verticale */}
-      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-24 lg:hidden">
+      {/* Liste complète : visible sur mobile et en mouvement réduit, lue par les lecteurs d'écran partout. */}
+      <div className="mx-auto max-w-[1440px] px-[var(--gutter)] py-24 lg:sr-only lg:motion-reduce:not-sr-only">
         <p className="eyebrow mb-6 flex items-center gap-3">
           <span className="text-volt">Méthode</span>
           <span className="h-px w-8 bg-current opacity-40" />
